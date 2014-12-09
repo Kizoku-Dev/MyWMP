@@ -1,0 +1,13 @@
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\bin\Debug\Serjay Nigga Doger.exe.config
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\bin\Debug\Serjay Nigga Doger.exe
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\bin\Debug\Serjay Nigga Doger.pdb
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay Nigga Doger.csprojResolveAssemblyReference.cache
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\MainWindow.baml
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\MainWindow.g.cs
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\App.g.cs
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay Nigga Doger_MarkupCompile.cache
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay Nigga Doger.g.resources
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay_Nigga_Doger.Properties.Resources.resources
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay Nigga Doger.csproj.GenerateResource.Cache
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay Nigga Doger.exe
+D:\Source\Repos\MyWMP\Serjay Nigga Doger\obj\Debug\Serjay Nigga Doger.pdb
