@@ -1,0 +1,16 @@
+﻿<Window x:Class="WMP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="578.8" Width="697.8">
+    <Grid>
+        <MediaElement Name="media1" Height="425" Margin="10,10,10.2,0" VerticalAlignment="Top" MediaOpened="media1_MediaOpened" Volume="1"/>
+        <Slider Name="sliderMedia" HorizontalAlignment="Left" Margin="10,440,0,0" VerticalAlignment="Top" Width="671" ValueChanged="slideMedia_ValueChanged"/>
+        <Slider Name="sliderVolume" HorizontalAlignment="Left" Margin="556,477,0,0" VerticalAlignment="Top" Width="125" Maximum="1" Value="2" ValueChanged="slideVolume_ValueChanged"/>
+        <Label Content="Volume" HorizontalAlignment="Left" Margin="502,468,0,0" VerticalAlignment="Top" Height="27"/>
+        <Button Content="Play" HorizontalAlignment="Left" Margin="308,477,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="Button_Click"/>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="244,477,0,0" VerticalAlignment="Top" Width="47" Height="38" Click="Button_Click_1"/>
+        <Button Content="Pause" HorizontalAlignment="Left" Margin="409,477,0,0" VerticalAlignment="Top" Width="45" Height="38" Click="Button_Click_2"/>
+        <Button Content="Open" HorizontalAlignment="Left" Margin="29,477,0,0" VerticalAlignment="Top" Width="48" Height="38" Click="Button_Click_3"/>
+
+    </Grid>
+</Window>
