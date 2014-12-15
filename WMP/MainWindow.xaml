@@ -1,0 +1,62 @@
+﻿<Window x:Class="WMP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="577.2" Width="975" Name="mainWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="34*"/>
+            <ColumnDefinition Width="598*"/>
+            <ColumnDefinition Width="337*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="969" Margin="0,0,-0.2,0" x:Name="imageDeFond"/>
+        <MediaElement HorizontalAlignment="Left" Height="373" Margin="10,37,0,0" VerticalAlignment="Top" Width="676" x:Name="mediaElement" LoadedBehavior="Manual" MediaOpened="mediaElement_Opened" Grid.ColumnSpan="3"/>
+        <Slider HorizontalAlignment="Left" Margin="10,415,0,0" VerticalAlignment="Top" Width="676" ValueChanged="Slider_ValueChanged_1" x:Name="mediaSlider" Grid.ColumnSpan="3"/>
+        <Slider HorizontalAlignment="Left" Margin="502.4,487,0,0" VerticalAlignment="Top" Width="150" ValueChanged="Slider_ValueChanged" x:Name="soundSlider" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Button HorizontalAlignment="Left" Margin="324.4,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1">
+            <Image Source="C:\Users\ovoyan_s\Desktop\WMP\play.png"/>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="244.4,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.Column="1">
+            <Image Source="C:\Users\ovoyan_s\Desktop\WMP\pause.png"/>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="164.4,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2" Grid.Column="1">
+            <Image Source="C:\Users\ovoyan_s\Desktop\WMP\stop.png"/>
+        </Button>
+        <DockPanel Grid.Column="1" HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="443.4,192,0,0" VerticalAlignment="Top" Width="99"/>
+        <TreeView Grid.Column="2" HorizontalAlignment="Left" Height="524" Margin="59,10,0,0" VerticalAlignment="Top" Width="268" Name="libList" MouseRightButtonUp="treeRightButtonUp">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <EventSetter
+                        Event="TreeViewItem.MouseRightButtonDown"
+                        Handler="treeEventHandler"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Margin="0,0,-33.6,0"/>
+            <StackPanel></StackPanel>
+        </DockPanel>
+        <Grid HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="676" Grid.ColumnSpan="3" Margin="10,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="157*"/>
+            </Grid.ColumnDefinitions>
+            <Menu DockPanel.Dock="Top" Margin="0,3,370,2" Height="22" Grid.ColumnSpan="2">
+                <MenuItem Header="          Files" Width="100" Name="fileMenu" RenderTransformOrigin="0.933,0.428" Height="21">
+                    <MenuItem Header="Open" Click="open_Clicked"/>
+                </MenuItem>
+                <MenuItem Header="      Options" Width="100" Height="22" Name="optionsMenu">
+                    <MenuItem Header="Sound"/>
+                    <MenuItem Header="Opacity"/>
+                    <MenuItem Header="Video"/>
+                </MenuItem>
+                <MenuItem Header="         Help" Width="100" Height="22" Name="helpMenu">
+                    <MenuItem Header="Help"/>
+                    <MenuItem Header="About Us"/>
+                </MenuItem>
+            </Menu>
+
+        </Grid>
+        <Label Content="Nan" Grid.Column="1" HorizontalAlignment="Left" Margin="576.6,442,0,0" VerticalAlignment="Top" Width="71" Name="totalLabel" Grid.ColumnSpan="2"/>
+        <Label Content="Nan" Grid.Column="1" HorizontalAlignment="Left" Margin="502.6,442,0,0" VerticalAlignment="Top" Width="69" Name="currentLabel"/>
+    </Grid>
+</Window>
