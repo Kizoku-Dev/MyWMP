@@ -134,7 +134,7 @@ namespace WMP
         private void generalMenu()
         {
             ContextMenu contextMenu = new ContextMenu();
-
+            //test
             this.createMenuItemToContextMenu(contextMenu, "Create Playlist");
             ((MenuItem)contextMenu.Items.GetItemAt(0)).Click += new RoutedEventHandler(this.create_playlist);
             contextMenu.IsOpen = true;
@@ -154,16 +154,14 @@ namespace WMP
                 }
                 if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.txt") == true)
                 {
-/*                    MessageBox.Show("Step 1");
+                    MessageBox.Show("Step 1");
                     StringBuilder sb = new StringBuilder();
                     using (StringWriter stringWriter = new StringWriter(sb))
                     {
                         XmlWriterSettings settings = new XmlWriterSettings();
                         settings.Indent = true;
-                        settings.IndentChars = "  ";
-                        settings.NewLineChars = "\r\n";
-                        MessageBox.Show("Step 2");
-                        using (XmlTextWriter textWriter = XmlTextWriter.Create(sb, settings)
+                        settings.IndentChars = "\t";
+                        using (XmlWriter textWriter = XmlWriter.Create(sb, settings))
                         {
                             MessageBox.Show("Step 3");
                             textWriter.WriteStartElement("Playlist");
@@ -171,14 +169,14 @@ namespace WMP
                             textWriter.WriteEndElement();
                         }
                     }
-                    using (StreamWriter streamWriter = new StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.txt", true, Encoding.UTF8))
+                    using (StreamWriter streamWriter = new StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.txt", true))
                     {
                         streamWriter.WriteLine(sb.ToString());
                         streamWriter.Close();
                     }
                     TreeViewItem tvi = new TreeViewItem();
                     tvi.Header = "New Playlist";
-                    this.libList.Items.Add(tvi);*/
+                    this.libList.Items.Add(tvi);
                 }
             }
         }
