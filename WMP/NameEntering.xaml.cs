@@ -24,20 +24,23 @@ namespace WMP
             InitializeComponent();
         }
 
-        public NameEntering(String labelName, String editName, String buttonName, MainWindow mainWindow)
+        public NameEntering(String labelName, String editName, String buttonName)
         {
             InitializeComponent();
             this.buttonToUse.Content = buttonName;
             this.editToUse.Text = editName;
             this.labelToUse.Content = labelName;
-            this.buttonToUse.Click += new RoutedEventHandler(mainWindow.renaming);
         }
 
-        public void setNames(String labelName, String editName, String buttonName)
+        public void setNames(String labelName, String editName, String buttonName, MainWindow mainWindow, int option)
         {
             this.buttonToUse.Content = buttonName;
             this.editToUse.Text = editName;
             this.labelToUse.Content = labelName;
+            if (option == 0)
+                this.buttonToUse.Click += new RoutedEventHandler(mainWindow.renaming_playlist);
+            if (option == 1)
+                this.buttonToUse.Click += new RoutedEventHandler(mainWindow.renaming_media);
         }
     }
 }

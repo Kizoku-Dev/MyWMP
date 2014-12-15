@@ -25,6 +25,7 @@ namespace WMP
     public partial class MainWindow : Window
     {
         NameEntering nameEntering;
+        XmlDocument playListDocument;
 
         public MainWindow()
         {
@@ -38,7 +39,26 @@ namespace WMP
             this.imageDeFond.Source = bm;
             this.imageDeFond.Height = (int)this.mainWindow.Height;
             this.imageDeFond.Width = (int)this.mainWindow.Width;
-            nameEntering = new NameEntering("", "", "", this);
+            nameEntering = new NameEntering("", "", "");
+            this.playListDocument = new XmlDocument();
+            string str = "";
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == true)
+            {
+                MessageBox.Show("LOOL");
+                StreamReader sr = new StreamReader("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", Encoding.UTF8);
+                str = sr.ReadToEnd();
+            }
+
+            if (str.Length > 10)
+            {
+                using (XmlReader xmlR = XmlReader.Create(new StringReader(str)))
+                    this.playListDocument.Load("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
+            }
+            else
+            {
+                XmlNode root = this.playListDocument.CreateElement("PlayLists");
+                this.playListDocument.AppendChild(root);
+            }
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -134,7 +154,6 @@ namespace WMP
         private void generalMenu()
         {
             ContextMenu contextMenu = new ContextMenu();
-            //test
             this.createMenuItemToContextMenu(contextMenu, "Create Playlist");
             ((MenuItem)contextMenu.Items.GetItemAt(0)).Click += new RoutedEventHandler(this.create_playlist);
             contextMenu.IsOpen = true;
@@ -143,42 +162,95 @@ namespace WMP
 
         private void create_playlist(object sender, EventArgs e)
         {
-            if (this.playlistExists("New Playlist") == true)
-                MessageBox.Show("There is arleady a playlist with the \"New Playlist\" name");
+            if (this.playlistExists("NewPlayList") == true)
+                MessageBox.Show("There is arleady a playlist with the \"NewPlayList\" name");
             else
             {
-                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.txt") == false)
+                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == false)
                 {
-                    FileStream newFile = System.IO.File.Create("C:\\Users\\ovoyan_s\\Desktop\\lol.txt");
+                    FileStream newFile = System.IO.File.Create("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
                     newFile.Close();
                 }
-                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.txt") == true)
+                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == true)
                 {
-                    MessageBox.Show("Step 1");
-                    StringBuilder sb = new StringBuilder();
-                    using (StringWriter stringWriter = new StringWriter(sb))
-                    {
-                        XmlWriterSettings settings = new XmlWriterSettings();
-                        settings.Indent = true;
-                        settings.IndentChars = "\t";
-                        using (XmlWriter textWriter = XmlWriter.Create(sb, settings))
-                        {
-                            MessageBox.Show("Step 3");
-                            textWriter.WriteStartElement("Playlist");
-                            textWriter.WriteElementString("Time", DateTime.Now.ToString());
-                            textWriter.WriteEndElement();
-                        }
-                    }
-                    using (StreamWriter streamWriter = new StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.txt", true))
-                    {
-                        streamWriter.WriteLine(sb.ToString());
-                        streamWriter.Close();
-                    }
+                    this.fillXmlPlaylistReader();
+                    this.addPlaylist();
+                    this.fillPlayListFile();
                     TreeViewItem tvi = new TreeViewItem();
-                    tvi.Header = "New Playlist";
+                    tvi.Header = "NewPlayList";
                     this.libList.Items.Add(tvi);
                 }
             }
+        }
+
+        private void addPlaylist()
+        {
+            XmlNode n1 = this.playListDocument.CreateElement("NewPlayList");
+            this.playListDocument.ChildNodes.Item(0).AppendChild(n1);
+        }
+
+        private void fillXmlPlaylistReader()
+        {
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == false)
+                return;
+            StreamReader sr = new StreamReader("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", Encoding.UTF8);
+            string str = sr.ReadToEnd();
+            StringBuilder sb = new StringBuilder();
+
+            if (str.Length > 10)
+            {
+                using (XmlReader xmlR = XmlReader.Create(new StringReader(str)))
+                {
+                    this.playListDocument.Load("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
+                }
+            }
+            sr.Close();
+        }
+
+        private void fillPlayListFile()
+        {
+            StringBuilder sb = new StringBuilder();
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "\t";
+            using (XmlWriter textWriter = XmlWriter.Create(sb, settings))
+                this.writeOnFileWithXmlDocument(this.playListDocument, textWriter);
+            using (StreamWriter streamWriter = new StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", false))
+            {
+                string strToAdd = sb.ToString();
+                strToAdd = strToAdd.Replace("utf-16", "utf-8");
+                MessageBox.Show(strToAdd);
+                streamWriter.WriteLine(strToAdd);
+                streamWriter.Close();
+            }
+        }
+
+        private void writeOnFileWithXmlDocument(XmlDocument xmlDocument, XmlWriter xmlW)
+        {
+            foreach (XmlNode nodeToUse in xmlDocument.ChildNodes)
+                this.writeChildNodes(xmlDocument, nodeToUse, xmlW);
+        }
+
+        private void writeChildNodes(XmlDocument xmlDocument, XmlNode xmlNode, XmlWriter xmlW)
+        {
+            xmlW.WriteStartElement(xmlNode.Name);
+            // Writes attributes of a node
+            if (xmlNode.Attributes != null && xmlNode.Attributes.Count > 0)
+                foreach (XmlAttribute xmlA in xmlNode.Attributes)
+                    xmlW.WriteElementString(xmlA.Name, xmlA.Value);
+            // Recursivity : allows to go deeper in the arborescence of nodes and do the same operation
+            if (xmlNode.HasChildNodes == true)
+                foreach (XmlNode nodeToUse in xmlNode.ChildNodes)
+                    this.writeChildNodes(xmlDocument, nodeToUse, xmlW);
+            xmlW.WriteEndElement();
+        }
+
+        private List<String> retElement(int option, string title)
+        {
+            List<String> listToRet = new List<String>();
+
+
+            return (listToRet);
         }
 
         private bool playlistExists(string name)
@@ -196,9 +268,9 @@ namespace WMP
 
         private void create_media(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.txt") == false)
-                System.IO.File.Create("C:\\Users\\ovoyan_s\\Desktop\\lol.txt");
-            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.txt") == true)
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == false)
+                System.IO.File.Create("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == true)
             {
                 OpenFileDialog fileDialog = new OpenFileDialog();
                 fileDialog.AddExtension = true;
@@ -211,7 +283,7 @@ namespace WMP
                 item.Header = fileDialog.SafeFileName;
                 ((TreeViewItem)this.libList.SelectedItem).Items.Add(item);
 
-                System.IO.StreamWriter streamWriter = new System.IO.StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.txt", true);
+                System.IO.StreamWriter streamWriter = new System.IO.StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", true);
                 streamWriter.WriteLine("Media : " + fileDialog.SafeFileName + " " + fileDialog.FileName);
                 streamWriter.Close();
             }
@@ -232,7 +304,7 @@ namespace WMP
 
         private void rename_playlist(object sender, EventArgs e)
         {
-            this.nameEntering.setNames("Enter your playlist name", "New PlayList", "Change your Playlist Name !");
+            this.nameEntering.setNames("Enter your playlist name", "NewPlayList", "Change your Playlist Name !", this, 0);
             if (this.nameEntering.Visibility == System.Windows.Visibility.Collapsed
                 || this.nameEntering.Visibility == System.Windows.Visibility.Hidden)
                 this.nameEntering.Visibility = System.Windows.Visibility.Visible;
@@ -240,7 +312,7 @@ namespace WMP
 
         private void rename_media(object sender, EventArgs e)
         {
-            this.nameEntering.setNames("Enter your media name", "New Media", "Change your Media Name !");
+            this.nameEntering.setNames("Enter your media name", "NewMedia", "Change your Media Name !", this, 1);
             if (this.nameEntering.Visibility == System.Windows.Visibility.Collapsed
                 || this.nameEntering.Visibility == System.Windows.Visibility.Hidden)
                 this.nameEntering.Visibility = System.Windows.Visibility.Visible;
@@ -267,10 +339,22 @@ namespace WMP
             contextMenu.Items.Add(itemToAdd);
         }
 
-        public void renaming(object sender, EventArgs e)
+        public void renaming_media(object sender, EventArgs e)
         {
+            XmlNode xmlNode = this.playListDocument.GetElementById((string)((TreeViewItem)this.libList.SelectedItem).Header);
             ((TreeViewItem)this.libList.SelectedItem).Header = this.nameEntering.editToUse.Text;
             this.nameEntering.Visibility = System.Windows.Visibility.Hidden;
+            xmlNode.InnerXml = xmlNode.InnerXml.Replace("OldName>", "NewName>");
+        }
+
+        public void renaming_playlist(object sender, EventArgs e)
+        {
+            XmlNodeList xmlNode = this.playListDocument.GetElementsByTagName((string)((TreeViewItem)this.libList.SelectedItem).Header);
+            ((TreeViewItem)this.libList.SelectedItem).Header = this.nameEntering.editToUse.Text;
+            this.nameEntering.Visibility = System.Windows.Visibility.Hidden;
+            MessageBox.Show(xmlNode.Count.ToString());
+            xmlNode.Item(0).ParentNode.InnerXml = xmlNode.Item(0).ParentNode.InnerXml.Replace(xmlNode.Item(0).Name, (string)((TreeViewItem)this.libList.SelectedItem).Header);
+            this.fillPlayListFile();
         }
 
         public void media_properties(object sender, EventArgs e)
