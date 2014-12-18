@@ -12,15 +12,9 @@
         <MediaElement HorizontalAlignment="Left" Height="373" Margin="10,37,0,0" VerticalAlignment="Top" Width="676" x:Name="mediaElement" LoadedBehavior="Manual" MediaOpened="mediaElement_Opened" Grid.ColumnSpan="3"/>
         <Slider HorizontalAlignment="Left" Margin="10,415,0,0" VerticalAlignment="Top" Width="676" ValueChanged="Slider_ValueChanged_1" x:Name="mediaSlider" Grid.ColumnSpan="3"/>
         <Slider HorizontalAlignment="Left" Margin="502.4,487,0,0" VerticalAlignment="Top" Width="150" ValueChanged="Slider_ValueChanged" x:Name="soundSlider" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button HorizontalAlignment="Left" Margin="324.4,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1">
-            <Image Source="C:\Users\ovoyan_s\Desktop\WMP\play.png"/>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="244.4,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.Column="1">
-            <Image Source="C:\Users\ovoyan_s\Desktop\WMP\pause.png"/>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="164.4,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2" Grid.Column="1">
-            <Image Source="C:\Users\ovoyan_s\Desktop\WMP\stop.png"/>
-        </Button>
+        <Button HorizontalAlignment="Left" Margin="324.6,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1" Name="play" Height="74"/>
+        <Button HorizontalAlignment="Left" Margin="244.6,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.Column="1" Name="pause" Height="74"/>
+        <Button HorizontalAlignment="Left" Margin="164.6,460,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2" Grid.Column="1" Name="stop" Height="74"/>
         <DockPanel Grid.Column="1" HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="443.4,192,0,0" VerticalAlignment="Top" Width="99"/>
         <TreeView Grid.Column="2" HorizontalAlignment="Left" Height="524" Margin="59,10,0,0" VerticalAlignment="Top" Width="268" Name="libList" MouseRightButtonUp="treeRightButtonUp">
             <TreeView.ItemContainerStyle>

@@ -11,3 +11,6 @@ c:\users\noeld_000\documents\visual studio 2013\Projects\WMP\WMP\obj\Debug\WMP.P
 c:\users\noeld_000\documents\visual studio 2013\Projects\WMP\WMP\obj\Debug\WMP.csproj.GenerateResource.Cache
 c:\users\noeld_000\documents\visual studio 2013\Projects\WMP\WMP\obj\Debug\WMP.exe
 c:\users\noeld_000\documents\visual studio 2013\Projects\WMP\WMP\obj\Debug\WMP.pdb
+C:\Users\ovoyan_s\Source\Repos\MyWMP\Simple\WMP\WMP\bin\Debug\WMP.exe.config
+C:\Users\ovoyan_s\Source\Repos\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.exe
+C:\Users\ovoyan_s\Source\Repos\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.pdb
