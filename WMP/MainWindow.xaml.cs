@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
-using System.Text;
 using System.IO;
 using Microsoft.Win32;
 
@@ -32,7 +31,7 @@ namespace WMP
             InitializeComponent();
             BitmapImage bm = new BitmapImage();
             bm.BeginInit();
-            bm.UriSource = new Uri("C:\\Users\\ovoyan_s\\Desktop\\WMP\\fall.jpg");
+            bm.UriSource = new Uri("Doc\\fall.jpg");
             bm.DecodePixelHeight= (int)this.mainWindow.Height;
             bm.DecodePixelWidth = (int)this.mainWindow.Width;
             bm.EndInit();
@@ -42,17 +41,17 @@ namespace WMP
             nameEntering = new NameEntering("", "", "");
             this.playListDocument = new XmlDocument();
             string str = "";
-            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == true)
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Doc\\lol.xml") == true)
             {
                 MessageBox.Show("LOOL");
-                StreamReader sr = new StreamReader("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", Encoding.UTF8);
+                StreamReader sr = new StreamReader("C:\\Users\\ovoyan_s\\Doc\\lol.xml", Encoding.UTF8);
                 str = sr.ReadToEnd();
             }
 
             if (str.Length > 10)
             {
                 using (XmlReader xmlR = XmlReader.Create(new StringReader(str)))
-                    this.playListDocument.Load("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
+                    this.playListDocument.Load("C:\\Users\\ovoyan_s\\Doc\\lol.xml");
             }
             else
             {
@@ -166,12 +165,12 @@ namespace WMP
                 MessageBox.Show("There is arleady a playlist with the \"NewPlayList\" name");
             else
             {
-                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == false)
+                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Doc\\lol.xml") == false)
                 {
-                    FileStream newFile = System.IO.File.Create("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
+                    FileStream newFile = System.IO.File.Create("C:\\Users\\ovoyan_s\\Doc\\lol.xml");
                     newFile.Close();
                 }
-                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == true)
+                if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Doc\\lol.xml") == true)
                 {
                     this.fillXmlPlaylistReader();
                     this.addPlaylist();
@@ -191,9 +190,9 @@ namespace WMP
 
         private void fillXmlPlaylistReader()
         {
-            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == false)
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Doc\\lol.xml") == false)
                 return;
-            StreamReader sr = new StreamReader("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", Encoding.UTF8);
+            StreamReader sr = new StreamReader("C:\\Users\\ovoyan_s\\Doc\\lol.xml", Encoding.UTF8);
             string str = sr.ReadToEnd();
             StringBuilder sb = new StringBuilder();
 
@@ -201,7 +200,7 @@ namespace WMP
             {
                 using (XmlReader xmlR = XmlReader.Create(new StringReader(str)))
                 {
-                    this.playListDocument.Load("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
+                    this.playListDocument.Load("C:\\Users\\ovoyan_s\\Doc\\lol.xml");
                 }
             }
             sr.Close();
@@ -215,7 +214,7 @@ namespace WMP
             settings.IndentChars = "\t";
             using (XmlWriter textWriter = XmlWriter.Create(sb, settings))
                 this.writeOnFileWithXmlDocument(this.playListDocument, textWriter);
-            using (StreamWriter streamWriter = new StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", false))
+            using (StreamWriter streamWriter = new StreamWriter("C:\\Users\\ovoyan_s\\Doc\\lol.xml", false))
             {
                 string strToAdd = sb.ToString();
                 strToAdd = strToAdd.Replace("utf-16", "utf-8");
@@ -268,9 +267,9 @@ namespace WMP
 
         private void create_media(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == false)
-                System.IO.File.Create("C:\\Users\\ovoyan_s\\Desktop\\lol.xml");
-            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Desktop\\lol.xml") == true)
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Doc\\lol.xml") == false)
+                System.IO.File.Create("C:\\Users\\ovoyan_s\\Doc\\lol.xml");
+            if (System.IO.File.Exists("C:\\Users\\ovoyan_s\\Doc\\lol.xml") == true)
             {
                 OpenFileDialog fileDialog = new OpenFileDialog();
                 fileDialog.AddExtension = true;
@@ -283,7 +282,7 @@ namespace WMP
                 item.Header = fileDialog.SafeFileName;
                 ((TreeViewItem)this.libList.SelectedItem).Items.Add(item);
 
-                System.IO.StreamWriter streamWriter = new System.IO.StreamWriter("C:\\Users\\ovoyan_s\\Desktop\\lol.xml", true);
+                System.IO.StreamWriter streamWriter = new System.IO.StreamWriter("C:\\Users\\ovoyan_s\\Doc\\lol.xml", true);
                 streamWriter.WriteLine("Media : " + fileDialog.SafeFileName + " " + fileDialog.FileName);
                 streamWriter.Close();
             }
