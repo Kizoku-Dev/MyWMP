@@ -19,8 +19,6 @@ namespace WMP
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Init Model
-
             // Init View
             media1.LoadedBehavior = MediaState.Manual;
             media1.Volume = (double) sliderVolume.Value;
@@ -29,6 +27,9 @@ namespace WMP
             this._viewModel = new ViewModel();
         }
 
+        /*
+         * Button event
+         */
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             if (media1.Source != null)
@@ -46,6 +47,9 @@ namespace WMP
             this._viewModel.btnOpen_Click(sender, e, media1, sliderMedia);
         }
 
+        /*
+         * Slide media event
+         */
         private void slideMedia_MouseDown(object sender, RoutedEventArgs e)
         {
             this._viewModel.slideMedia_MouseDown(sender, e, media1);
@@ -56,16 +60,25 @@ namespace WMP
             this._viewModel.slideMedia_MouseUp(sender, e, media1, sliderMedia);
         }
 
+        /*
+         * Slide volume event
+         */
         private void slideVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             media1.Volume = (double)sliderVolume.Value;
         }
 
+        /*
+         * Media opened event
+         */
         private void media1_MediaOpened(object sender, RoutedEventArgs e)
         {
             this._viewModel.media1_MediaOpened(sender, e, media1, sliderMedia);
         }
 
+        /*
+         * Library button event
+         */
         private void btnMusic_Click(object sender, RoutedEventArgs e)
         {
             this._viewModel.btnMusic_Click(sender, e, listLibraryMusic, listLibraryVideo, listLibraryImage);
@@ -81,6 +94,9 @@ namespace WMP
             this._viewModel.btnImage_Click(sender, e, listLibraryMusic, listLibraryVideo, listLibraryImage);
         }
 
+        /*
+         * Library context menu event
+         */
         private void btnMusic_selectDirectory(object sender, RoutedEventArgs e)
         {
             this._viewModel.btnMusic_selectDirectory(sender, e, listLibraryMusic);
@@ -96,6 +112,9 @@ namespace WMP
             this._viewModel.btnImage_selectDirectory(sender, e, listLibraryImage);
         }
 
+        /*
+         * Library sort row event
+         */
         private void listLibraryMusic_Click(object sender, RoutedEventArgs e)
         {
             this._viewModel.listLibrary_Click(sender, e, listLibraryMusic);
@@ -111,6 +130,9 @@ namespace WMP
             this._viewModel.listLibrary_Click(sender, e, listLibraryImage);
         }
 
+        /*
+         * Library play media on double click event
+         */
         private void listLibraryMusicItem_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             this._viewModel.listLibraryMusicItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryMusic);

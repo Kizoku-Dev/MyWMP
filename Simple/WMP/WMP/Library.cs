@@ -17,6 +17,9 @@ namespace WMP
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
 
+        /*
+         * Directory path setters
+         */
         public void SetMusicDirectory(String s)
         {
             this._musicDirectory = s;
@@ -32,6 +35,9 @@ namespace WMP
             this._imageDirectory = s;
         }
 
+        /*
+         * Refresh list with path
+         */
         public void RefreshMusic(ListView listLibrary)
         {
             string[] files = Directory.GetFiles(this._musicDirectory);
@@ -84,6 +90,9 @@ namespace WMP
             listLibrary.ItemsSource = items;
         }
 
+        /*
+         * Sorter
+         */
         public void SortColumn(RoutedEventArgs e, ListView listLibrary)
         {
             GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;

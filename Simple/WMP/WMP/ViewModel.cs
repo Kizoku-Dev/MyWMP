@@ -21,6 +21,9 @@ namespace WMP
             this._library = new Library();   
         }
 
+        /*
+         * Controller buttons
+         */
         public void btnPlay_Click(object sender, RoutedEventArgs e,
             MediaElement media1, Slider sliderMedia)
         {
@@ -78,7 +81,6 @@ namespace WMP
             MediaElement media1)
         {
             this._slideChanged = true;
-
         }
 
         public void slideMedia_MouseUp(object sender, RoutedEventArgs e,
@@ -100,7 +102,9 @@ namespace WMP
                 sliderMedia.Maximum = media1.NaturalDuration.TimeSpan.TotalMilliseconds;
         }
 
-        //-------------------Library
+        /*
+         * Library buttons
+         */
         public void btnMusic_Click(object sender, RoutedEventArgs e,
             ListView listLibraryMusic, ListView listLibraryVideo, ListView listLibraryImage)
         {
@@ -137,6 +141,9 @@ namespace WMP
             this._library.RefreshImage(listLibraryImage);
         }
 
+        /*
+         * Library context menus
+         */
         public void btnMusic_selectDirectory(object sender, RoutedEventArgs e,
             ListView listLibrary)
         {
@@ -154,7 +161,7 @@ namespace WMP
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                this._library.SetMusicDirectory(fbd.SelectedPath);
+                this._library.SetVideoDirectory(fbd.SelectedPath);
                 this._library.RefreshVideo(listLibrary);
             }
         }
@@ -165,17 +172,23 @@ namespace WMP
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                this._library.SetMusicDirectory(fbd.SelectedPath);
+                this._library.SetImageDirectory(fbd.SelectedPath);
                 this._library.RefreshImage(listLibrary);
             }
         }
 
+        /*
+         * Library sort filter
+         */
         public void listLibrary_Click(object sender, RoutedEventArgs e,
             ListView listLibrary)
         {
             this._library.SortColumn(e, listLibrary);
         }
 
+        /*
+         * Library load on double click
+         */
         public void listLibraryMusicItem_DoubleClick(object sender, MouseButtonEventArgs e,
             MediaElement media1, Slider sliderMedia, ListView listLibrary)
         {
