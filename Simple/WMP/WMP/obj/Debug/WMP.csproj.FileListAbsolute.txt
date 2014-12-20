@@ -14,3 +14,16 @@ c:\users\noeld_000\documents\visual studio 2013\Projects\WMP\WMP\obj\Debug\WMP.p
 C:\Users\ovoyan_s\Source\Repos\MyWMP\Simple\WMP\WMP\bin\Debug\WMP.exe.config
 C:\Users\ovoyan_s\Source\Repos\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.exe
 C:\Users\ovoyan_s\Source\Repos\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.pdb
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\bin\Debug\WMP.exe.config
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.exe
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.pdb
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\bin\Debug\WMP.exe
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\bin\Debug\WMP.pdb
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.csprojResolveAssemblyReference.cache
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\MainWindow.baml
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\MainWindow.g.cs
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\App.g.cs
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP_MarkupCompile.cache
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.g.resources
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.Properties.Resources.resources
+D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.csproj.GenerateResource.Cache
