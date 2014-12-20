@@ -11,7 +11,74 @@
         <Button Name="btnPlay" Content="Play/Pause" HorizontalAlignment="Left" Margin="308,477,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="btnPlay_Click" />
         <Button Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="244,477,0,0" VerticalAlignment="Top" Width="47" Height="38" Click="btnStop_Click"/>
         <Button Name="btnOpen" Content="Open" HorizontalAlignment="Left" Margin="29,477,0,0" VerticalAlignment="Top" Width="48" Height="38" Click="btnOpen_Click"/>
-        <TreeView x:Name="Library" HorizontalAlignment="Left" Height="206.4" Margin="-186.8,10,0,0" VerticalAlignment="Top" Width="172"/>
-        <TreeView x:Name="Playlist" HorizontalAlignment="Left" Height="312.8" Margin="-186.8,221.4,0,0" VerticalAlignment="Top" Width="172"/>
+        <Button Name="btnMusic" Content="Music" HorizontalAlignment="Left" Margin="-186.8,10,0,0" VerticalAlignment="Top" Width="75" Click="btnMusic_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Select the directory" Click="btnMusic_selectDirectory"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <ListView Name="listLibraryMusic" HorizontalAlignment="Left" Height="391.907" Margin="29,25.222,0,0" VerticalAlignment="Top" Width="652" GridViewColumnHeader.Click="listLibraryMusic_Click" Visibility="Collapsed">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Filename" Width="150" DisplayMemberBinding="{Binding Filename}" />
+                    <GridViewColumn Header="Title" Width="150" DisplayMemberBinding="{Binding Title}" />
+                    <GridViewColumn Header="Album" Width="150" DisplayMemberBinding="{Binding Album}" />
+                    <GridViewColumn Header="Author" Width="150" DisplayMemberBinding="{Binding Author}" />
+                    <GridViewColumn Header="Length" Width="150" DisplayMemberBinding="{Binding Length}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="listLibraryMusicItem_DoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Button Name="btnVideo" Content="Video" HorizontalAlignment="Left" Margin="-186.8,34.96,0,0" VerticalAlignment="Top" Width="75" Click="btnVideo_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Select the directory" Click="btnVideo_selectDirectory"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <ListView Name="listLibraryVideo" HorizontalAlignment="Left" Height="391.907" Margin="29,25.222,0,0" VerticalAlignment="Top" Width="652" GridViewColumnHeader.Click="listLibraryVideo_Click" Visibility="Collapsed">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Filename" Width="150" DisplayMemberBinding="{Binding Filename}" />
+                    <GridViewColumn Header="Title" Width="150" DisplayMemberBinding="{Binding Title}" />
+                    <GridViewColumn Header="Album" Width="150" DisplayMemberBinding="{Binding Album}" />
+                    <GridViewColumn Header="Author" Width="150" DisplayMemberBinding="{Binding Author}" />
+                    <GridViewColumn Header="Length" Width="150" DisplayMemberBinding="{Binding Length}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="listLibraryVideoItem_DoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Button Name="btnImage" Content="Image" HorizontalAlignment="Left" Margin="-186.8,59.92,0,0" VerticalAlignment="Top" Width="75" Click="btnImage_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Select the directory" Click="btnImage_selectDirectory"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <ListView Name="listLibraryImage" HorizontalAlignment="Left" Height="391.907" Margin="29,25.222,0,0" VerticalAlignment="Top" Width="652" GridViewColumnHeader.Click="listLibraryImage_Click" Visibility="Collapsed">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Filename" Width="150" DisplayMemberBinding="{Binding Filename}" />
+                    <GridViewColumn Header="Title" Width="150" DisplayMemberBinding="{Binding Title}" />
+                    <GridViewColumn Header="Album" Width="150" DisplayMemberBinding="{Binding Album}" />
+                    <GridViewColumn Header="Author" Width="150" DisplayMemberBinding="{Binding Author}" />
+                    <GridViewColumn Header="Length" Width="150" DisplayMemberBinding="{Binding Length}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="listLibraryImageItem_DoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </Window>

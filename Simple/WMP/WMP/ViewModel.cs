@@ -3,14 +3,23 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using ListView = System.Windows.Controls.ListView;
+using ListViewItem = System.Windows.Controls.ListViewItem;
 
 namespace WMP
 {
     class ViewModel
     {
+        private Library _library;
         private bool _slideChanged;
+
+        public ViewModel()
+        {
+            this._library = new Library();   
+        }
 
         public void btnPlay_Click(object sender, RoutedEventArgs e,
             MediaElement media1, Slider sliderMedia)
@@ -91,5 +100,134 @@ namespace WMP
                 sliderMedia.Maximum = media1.NaturalDuration.TimeSpan.TotalMilliseconds;
         }
 
+        //-------------------Library
+        public void btnMusic_Click(object sender, RoutedEventArgs e,
+            ListView listLibraryMusic, ListView listLibraryVideo, ListView listLibraryImage)
+        {
+            if (listLibraryMusic.IsVisible)
+                listLibraryMusic.Visibility = Visibility.Collapsed;
+            else if (listLibraryMusic.Visibility == Visibility.Collapsed)
+                listLibraryMusic.Visibility = Visibility.Visible;
+            listLibraryVideo.Visibility = Visibility.Collapsed;
+            listLibraryImage.Visibility = Visibility.Collapsed;
+            this._library.RefreshMusic(listLibraryMusic);
+        }
+
+        public void btnVideo_Click(object sender, RoutedEventArgs e,
+            ListView listLibraryMusic, ListView listLibraryVideo, ListView listLibraryImage)
+        {
+            if (listLibraryVideo.IsVisible)
+                listLibraryVideo.Visibility = Visibility.Collapsed;
+            else if (listLibraryVideo.Visibility == Visibility.Collapsed)
+                listLibraryVideo.Visibility = Visibility.Visible;
+            listLibraryMusic.Visibility = Visibility.Collapsed;
+            listLibraryImage.Visibility = Visibility.Collapsed;
+            this._library.RefreshVideo(listLibraryVideo);
+        }
+
+        public void btnImage_Click(object sender, RoutedEventArgs e,
+            ListView listLibraryMusic, ListView listLibraryVideo, ListView listLibraryImage)
+        {
+            if (listLibraryImage.IsVisible)
+                listLibraryImage.Visibility = Visibility.Collapsed;
+            else if (listLibraryImage.Visibility == Visibility.Collapsed)
+                listLibraryImage.Visibility = Visibility.Visible;
+            listLibraryMusic.Visibility = Visibility.Collapsed;
+            listLibraryVideo.Visibility = Visibility.Collapsed;
+            this._library.RefreshImage(listLibraryImage);
+        }
+
+        public void btnMusic_selectDirectory(object sender, RoutedEventArgs e,
+            ListView listLibrary)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                this._library.SetMusicDirectory(fbd.SelectedPath);
+                this._library.RefreshMusic(listLibrary);
+            }
+        }
+
+        public void btnVideo_selectDirectory(object sender, RoutedEventArgs e,
+            ListView listLibrary)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                this._library.SetMusicDirectory(fbd.SelectedPath);
+                this._library.RefreshVideo(listLibrary);
+            }
+        }
+
+        public void btnImage_selectDirectory(object sender, RoutedEventArgs e,
+            ListView listLibrary)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                this._library.SetMusicDirectory(fbd.SelectedPath);
+                this._library.RefreshImage(listLibrary);
+            }
+        }
+
+        public void listLibrary_Click(object sender, RoutedEventArgs e,
+            ListView listLibrary)
+        {
+            this._library.SortColumn(e, listLibrary);
+        }
+
+        public void listLibraryMusicItem_DoubleClick(object sender, MouseButtonEventArgs e,
+            MediaElement media1, Slider sliderMedia, ListView listLibrary)
+        {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while ((dep != null) && !(dep is ListViewItem))
+                dep = VisualTreeHelper.GetParent(dep);
+            if (dep == null)
+                return;
+            MyMusic item = (MyMusic)listLibrary.ItemContainerGenerator.ItemFromContainer(dep);
+
+            try { media1.Source = new Uri(item.Path); }
+            catch { new NullReferenceException("Error"); }
+
+            listLibrary.Visibility = Visibility.Hidden;
+            this.btnStop_Click(sender, e, media1);
+            this.btnPlay_Click(sender, e, media1, sliderMedia);
+        }
+
+        public void listLibraryVideoItem_DoubleClick(object sender, MouseButtonEventArgs e,
+            MediaElement media1, Slider sliderMedia, ListView listLibrary)
+        {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while ((dep != null) && !(dep is ListViewItem))
+                dep = VisualTreeHelper.GetParent(dep);
+            if (dep == null)
+                return;
+            MyVideo item = (MyVideo)listLibrary.ItemContainerGenerator.ItemFromContainer(dep);
+
+            try { media1.Source = new Uri(item.Path); }
+            catch { new NullReferenceException("Error"); }
+
+            listLibrary.Visibility = Visibility.Hidden;
+            this.btnStop_Click(sender, e, media1);
+            this.btnPlay_Click(sender, e, media1, sliderMedia);
+        }
+
+        public void listLibraryImageItem_DoubleClick(object sender, MouseButtonEventArgs e,
+            MediaElement media1, Slider sliderMedia, ListView listLibrary)
+        {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while ((dep != null) && !(dep is ListViewItem))
+                dep = VisualTreeHelper.GetParent(dep);
+            if (dep == null)
+                return;
+            MyImage item = (MyImage)listLibrary.ItemContainerGenerator.ItemFromContainer(dep);
+
+            try { media1.Source = new Uri(item.Path); }
+            catch { new NullReferenceException("Error"); }
+
+            listLibrary.Visibility = Visibility.Hidden;
+            this.btnStop_Click(sender, e, media1);
+            this.btnPlay_Click(sender, e, media1, sliderMedia);
+        }
     }
 }
