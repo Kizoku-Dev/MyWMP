@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace WMP
@@ -20,11 +22,10 @@ namespace WMP
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Init View
-            media1.LoadedBehavior = MediaState.Manual;
             media1.Volume = (double) sliderVolume.Value;
-            
             // Init ViewModel
-            this._viewModel = new ViewModel();
+            this._viewModel = new ViewModel(sliderMedia, media1);
+            this._viewModel.RefreshPlaylists(treePlaylist);
         }
 
         /*
@@ -33,18 +34,24 @@ namespace WMP
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             if (media1.Source != null)
-                this._viewModel.btnPlay_Click(sender, e, media1, sliderMedia);
+                this._viewModel.btnPlay_Click(sender, e, media1, btnPlay, btnPause);
+        }
+
+        private void btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            if (media1.Source != null)
+                this._viewModel.btnPause_Click(sender, e, media1, btnPlay, btnPause);
         }
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             if (media1.Source != null)
-                this._viewModel.btnStop_Click(sender, e, media1);
+                this._viewModel.btnStop_Click(sender, e, media1, btnPlay, btnPause);
         }
 
         private void menuFileOpen_Click(object sender, RoutedEventArgs e)
         {
-            this._viewModel.menuFileOpen_Click(sender, e, media1, sliderMedia);
+            this._viewModel.menuFileOpen_Click(sender, e, media1, btnPlay, btnPause);
         }
         /*
          * Slide media event
@@ -134,25 +141,30 @@ namespace WMP
          */
         private void listLibraryMusicItem_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this._viewModel.listLibraryMusicItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryMusic);
+            this._viewModel.listLibraryMusicItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryMusic, btnPlay, btnPause);
         }
 
         private void listLibraryVideoItem_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this._viewModel.listLibraryVideoItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryVideo);
+            this._viewModel.listLibraryVideoItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryVideo, btnPlay, btnPause);
         }
 
         private void listLibraryImageItem_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this._viewModel.listLibraryImageItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryImage);
+            this._viewModel.listLibraryImageItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryImage, btnPlay, btnPause);
         }
 
         /*
-         * Playlist add elem
+         * Playlist add elem (default : MyDocuments/MyWMP/Playlist.txt)
          */
         private void menuPlaylistAdd_Click(object sender, RoutedEventArgs e)
         {
-            this._viewModel.menuPlaylistAdd_Click(sender, e, media1);
+            this._viewModel.menuPlaylistAdd_Click(sender, e, media1, treePlaylist);
+        }
+
+        private void treePlaylist_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this._viewModel.treePlaylist_DoubleClick(sender, e, media1, sliderMedia, treePlaylist, btnPlay, btnPause);
         }
 
         /*

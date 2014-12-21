@@ -60,6 +60,8 @@
     <Compile Include="Library.cs" />
     <Compile Include="MyImage.cs" />
     <Compile Include="MyMusic.cs" />
+    <Compile Include="MyMedia.cs" />
+    <Compile Include="MyPlaylist.cs" />
     <Compile Include="MyVideo.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="MyDialog.cs" />
