@@ -252,7 +252,7 @@ namespace WMP
             MediaElement media1)
         {
             String playlistName = MyDialog.Prompt("Add current media to playlist", "Enter the playlist's name");
-            if (!String.IsNullOrEmpty(playlistName) && !String.IsNullOrEmpty(media1.Source.AbsolutePath))
+            if (!String.IsNullOrEmpty(playlistName) && media1.Source != null && !String.IsNullOrEmpty(media1.Source.AbsolutePath))
             {
                 this._playlist.AddElem(playlistName, media1.Source.AbsolutePath);
             }

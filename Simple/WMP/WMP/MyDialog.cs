@@ -38,11 +38,7 @@ namespace WMP
             prompt.Text = title;
             prompt.StartPosition = FormStartPosition.CenterScreen;
             Label textLabel = new Label() { Left = 10, Top = 10, Text = text, Width = 480, Height = 180 };
-            Button confirmation = new Button() { Text = "Close", Left = 450, Width = 100, Top = 170 };
-            confirmation.Click += (sender, e) => { prompt.Close(); };
-            prompt.Controls.Add(confirmation);
             prompt.Controls.Add(textLabel);
-            prompt.AcceptButton = confirmation;
             prompt.ShowDialog();
         }
     }

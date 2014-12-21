@@ -27,4 +27,3 @@ D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP_MarkupCompile.cac
 D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.g.resources
 D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.Properties.Resources.resources
 D:\Work\Repos\Visual Studio\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.csproj.GenerateResource.Cache
-C:\Users\noeld_000\Documents\GitHub\MyWMP\Simple\WMP\WMP\obj\Debug\WMP.pdb
