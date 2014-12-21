@@ -13,12 +13,14 @@ namespace WMP
 {
     class ViewModel
     {
-        private Library _library;
+        private readonly Library _library;
+        private readonly Playlist _playlist;
         private bool _slideChanged;
 
         public ViewModel()
         {
             this._library = new Library();   
+            this._playlist = new Playlist();
         }
 
         /*
@@ -61,7 +63,7 @@ namespace WMP
             media1.Clock = null;
         }
 
-        public void btnOpen_Click(object sender, RoutedEventArgs e,
+        public void menuFileOpen_Click(object sender, RoutedEventArgs e,
             MediaElement media1, Slider sliderMedia)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -241,6 +243,31 @@ namespace WMP
             listLibrary.Visibility = Visibility.Hidden;
             this.btnStop_Click(sender, e, media1);
             this.btnPlay_Click(sender, e, media1, sliderMedia);
+        }
+
+        /*
+         * Playlist add elem (default : MyDocuments/MyWMP/Playlist.txt)
+         */
+        public void menuPlaylistAdd_Click(object sender, RoutedEventArgs e,
+            MediaElement media1)
+        {
+            String playlistName = MyDialog.Prompt("Add current media to playlist", "Enter the playlist's name");
+            if (!String.IsNullOrEmpty(playlistName) && !String.IsNullOrEmpty(media1.Source.AbsolutePath))
+            {
+                this._playlist.AddElem(playlistName, media1.Source.AbsolutePath);
+            }
+        }
+
+        /*
+         * Help
+         */
+        public void menuHelpHelp_Click(object sender, RoutedEventArgs routedEventArgs)
+        {
+            MyDialog.Show("Help", "No help for now");
+        }
+        public void menuHelpAbout_Click(object sender, RoutedEventArgs routedEventArgs)
+        {
+            MyDialog.Show("About us", "MyWindowsMediaPlayer by\n\ndovan_n - Noël DO VAN\ndurand_q - Jean-Noël DURAND\novoyan_s - Serguei OVOYAN\n peyrot_m - Matthieu PEYROT");
         }
     }
 }

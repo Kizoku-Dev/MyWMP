@@ -42,11 +42,10 @@ namespace WMP
                 this._viewModel.btnStop_Click(sender, e, media1);
         }
 
-        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        private void menuFileOpen_Click(object sender, RoutedEventArgs e)
         {
-            this._viewModel.btnOpen_Click(sender, e, media1, sliderMedia);
+            this._viewModel.menuFileOpen_Click(sender, e, media1, sliderMedia);
         }
-
         /*
          * Slide media event
          */
@@ -147,6 +146,26 @@ namespace WMP
         {
             this._viewModel.listLibraryImageItem_DoubleClick(sender, e, media1, sliderMedia, listLibraryImage);
         }
-        
+
+        /*
+         * Playlist add elem
+         */
+        private void menuPlaylistAdd_Click(object sender, RoutedEventArgs e)
+        {
+            this._viewModel.menuPlaylistAdd_Click(sender, e, media1);
+        }
+
+        /*
+         * Help
+         */
+        private void menuHelpAbout_Click(object sender, RoutedEventArgs e)
+        {
+            this._viewModel.menuHelpAbout_Click(sender, e);
+        }
+
+        private void menuHelpHelp_Click(object sender, RoutedEventArgs e)
+        {
+            this._viewModel.menuHelpHelp_Click(sender, e);
+        }
     }
 }

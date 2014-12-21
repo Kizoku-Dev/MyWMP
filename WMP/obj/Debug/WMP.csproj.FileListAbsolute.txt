@@ -52,3 +52,17 @@ D:\Work\Repos\Visual Studio\MyWMP\WMP\obj\Debug\WMP.csproj.GenerateResource.Cach
 C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\bin\Debug\WMP.exe.config
 C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP.exe
 C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP.pdb
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\bin\Debug\WMP.exe
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\bin\Debug\WMP.pdb
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP.csprojResolveAssemblyReference.cache
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\LibraryDialog.baml
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\MainWindow.baml
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\NameEntering.baml
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\LibraryDialog.g.cs
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\MainWindow.g.cs
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\NameEntering.g.cs
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\App.g.cs
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP_MarkupCompile.cache
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP.g.resources
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP.Properties.Resources.resources
+C:\Users\noeld_000\Documents\GitHub\MyWMP\WMP\obj\Debug\WMP.csproj.GenerateResource.Cache

@@ -61,6 +61,8 @@
     <Compile Include="MyImage.cs" />
     <Compile Include="MyMusic.cs" />
     <Compile Include="MyVideo.cs" />
+    <Compile Include="Playlist.cs" />
+    <Compile Include="MyDialog.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
