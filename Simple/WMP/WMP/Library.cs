@@ -14,6 +14,9 @@ namespace WMP
         private String _musicDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         private String _videoDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         private String _imageDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        readonly string[] _musicExtensions = { ".mp3", ".wav", ".ogg", ".flac" };
+        readonly string[] _videoExtensions = { ".avi", ".mp4", ".mkv" };
+        readonly string[] _imageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
 
@@ -40,10 +43,9 @@ namespace WMP
          */
         public void RefreshMusic(ListView listLibrary)
         {
-            string[] files = Directory.GetFiles(this._musicDirectory);
-            string[] extensions = { ".mp3", ".wav", ".ogg", ".flac" };
+            string[] files = Directory.GetFiles(this._musicDirectory, "*.*", SearchOption.AllDirectories);
             List<MyMusic> items = (from file in files
-                                   where extensions.Any(Path.GetExtension(file).Contains)
+                                   where this._musicExtensions.Any(Path.GetExtension(file).Contains)
                                    let tagFile = TagLib.File.Create(file)
                                    select new MyMusic()
                                    {
@@ -59,18 +61,16 @@ namespace WMP
 
         public void RefreshVideo(ListView listLibrary)
         {
-            string[] files = Directory.GetFiles(this._videoDirectory);
-            string[] extensions = { ".avi", ".mp4", ".mkv" };
+            string[] files = Directory.GetFiles(this._videoDirectory, "*.*", SearchOption.AllDirectories);
             List<MyVideo> items = (from file in files
-                                   where extensions.Any(Path.GetExtension(file).Contains)
+                                   where this._videoExtensions.Any(Path.GetExtension(file).Contains)
                                    let tagFile = TagLib.File.Create(file)
                                    select new MyVideo()
                                    {
                                        Path = file,
                                        Filename = Path.GetFileNameWithoutExtension(file),
-                                       Title = tagFile.Tag.Title,
-                                       Album = tagFile.Tag.Album,
-                                       Author = tagFile.Tag.FirstAlbumArtist,
+                                       Height = tagFile.Properties.VideoHeight,
+                                       Width = tagFile.Properties.VideoWidth,
                                        Length = tagFile.Properties.Duration
                                    }).ToList();
             listLibrary.ItemsSource = items;
@@ -78,10 +78,9 @@ namespace WMP
 
         public void RefreshImage(ListView listLibrary)
         {
-            string[] files = Directory.GetFiles(this._imageDirectory);
-            string[] extensions = { ".jpg", ".png", ".gif" };
+            string[] files = Directory.GetFiles(this._imageDirectory, "*.*", SearchOption.AllDirectories);
             List<MyImage> items = (from file in files
-                                   where extensions.Any(Path.GetExtension(file).Contains)
+                                   where this._imageExtensions.Any(Path.GetExtension(file).Contains)
                                    select new MyImage()
                                    {
                                        Path = file,
