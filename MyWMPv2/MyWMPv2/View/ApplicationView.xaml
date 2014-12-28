@@ -1,0 +1,170 @@
+﻿<Window x:Class="MyWMPv2.View.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Model="clr-namespace:MyWMPv2.Model"
+        Title="ApplicationView" Height="720" Width="1280"
+        WindowStyle="None" MinHeight="560" MinWidth="640">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" MinHeight="31" />
+            <RowDefinition Height="5*" MinHeight="41" />
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Row="0" Background="#51B6FF" MouseDown="DragWindow" MouseLeftButtonDown="TopClick">
+            <Label FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,3">MyWindowsMediaPlayerV2</Label>
+            <Button Command="{Binding Path=CloseWindowCommand}"
+                    Height="20" Width="auto" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" >
+                <Image Source="Resources/close.png" />
+            </Button>
+        </Grid>
+
+        <Grid Row="1" Background="#A8DAFF" MouseDown="DragWindow" MouseLeftButtonDown="TopClick">
+            <!-- Menu -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Content="Music" Click="Music_Click" VerticalAlignment="Center" Padding="20,0,20,3" Background="White" Foreground="Black" FontSize="20"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Select the directory" Click="Music_Directory"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Content="Video" Click="Video_Click" VerticalAlignment="Center" Padding="20,0,20,3" Background="White" Foreground="Black" FontSize="20"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Select the directory" Click="Video_Directory"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Content="Image" Click="Image_Click" VerticalAlignment="Center" Padding="20,0,20,3" Background="White" Foreground="Black" FontSize="20"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Select the directory" Click="Image_Directory"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Content="Playlist" Click="Playlist_Click" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="20,0,20,3" Background="White" Foreground="Black" FontSize="20"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Add current media to a playlist" Click="Playlist_Add"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </StackPanel>
+            <!-- End Menu -->
+        </Grid>
+        
+        <Grid Row="2">
+            <!-- Home -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*" />
+                    <RowDefinition Height="5*" MinHeight="45" />
+                    <RowDefinition Height="5*" MinHeight="45" />
+                </Grid.RowDefinitions>
+
+                <Grid Row="0" Background="Black">
+                    <MediaElement Name="Media" Source="{Binding Path=HomeViewModel.Media.Source}" LoadedBehavior="{Binding Path=HomeViewModel.Media.State}" MediaOpened="Media_MediaOpened"></MediaElement>
+                    <!-- Music -->
+                    <ListView Name="ListMusic" ButtonBase.Click="ListMusic_Click" Visibility="Collapsed">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Filename" Width="150" DisplayMemberBinding="{Binding Path=Filename}" />
+                                <GridViewColumn Header="Title" Width="150" DisplayMemberBinding="{Binding Path=Title}" />
+                                <GridViewColumn Header="Album" Width="150" DisplayMemberBinding="{Binding Path=Album}" />
+                                <GridViewColumn Header="Author" Width="150" DisplayMemberBinding="{Binding Path=Author}" />
+                                <GridViewColumn Header="Length" Width="120" DisplayMemberBinding="{Binding Path=Length}" />
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <EventSetter Event="MouseDoubleClick" Handler="ListMusic_DoubleClick" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <!-- End Music -->
+                    <!-- Video -->
+                    <ListView Name="ListVideo" ButtonBase.Click="ListVideo_Click" Visibility="Collapsed">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Filename" Width="150" DisplayMemberBinding="{Binding Filename}" />
+                                <GridViewColumn Header="Height" Width="150" DisplayMemberBinding="{Binding Height}" />
+                                <GridViewColumn Header="Width" Width="150" DisplayMemberBinding="{Binding Width}" />
+                                <GridViewColumn Header="Length" Width="120" DisplayMemberBinding="{Binding Length}" />
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <EventSetter Event="MouseDoubleClick" Handler="ListVideo_DoubleClick" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <!-- End Video -->
+                    <!-- Image -->
+                    <ListView Name="ListImage" ButtonBase.Click="ListImage_Click" Visibility="Collapsed">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Filename" Width="200" DisplayMemberBinding="{Binding Filename}" />
+                                <GridViewColumn Header="Path" Width="300" DisplayMemberBinding="{Binding Path}" />
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <EventSetter Event="MouseDoubleClick" Handler="ListImage_DoubleClick" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <!-- End Image -->
+                    <!-- Playlist -->
+                    <TreeView Name="TreePlaylist" HorizontalAlignment="Right" Visibility="Collapsed">
+                        <TreeView.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type Model:MyPlaylist}" ItemsSource="{Binding Medias}">
+                                <TextBlock Text="{Binding Name}" />
+                            </HierarchicalDataTemplate>
+                            <DataTemplate DataType="{x:Type Model:MyMedia}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </TreeView.Resources>
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <EventSetter Event="MouseDoubleClick" Handler="TreePlaylist_DoubleClick" />
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>
+                    <!-- End Playlist -->
+                </Grid>
+
+                <Grid Row="1">
+                    <Slider x:Name="SliderMedia" HorizontalAlignment="Stretch" VerticalAlignment="Center" Minimum="0"
+                    Thumb.DragStarted="SliderMedia_MouseDown" Thumb.DragCompleted="SliderMedia_MouseUp"/>
+                </Grid>
+
+                <Grid Row="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="MinWidth" Value="50"></Setter>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button Content="Open" Command="{Binding Path=HomeViewModel.MediaOpenCommand}" />
+                        <Button Content="Stop" Command="{Binding Path=HomeViewModel.MediaStopCommand}" />
+                        <Button Content="Play" Command="{Binding Path=HomeViewModel.MediaPlayCommand}" />
+                        <Button Content="Pause" Command="{Binding Path=HomeViewModel.MediaPauseCommand}" />
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center">Volume</Label>
+                        <Slider x:Name="SliderVolume" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125" Minimum="0" Maximum="1" Value="0.5"
+                        ValueChanged="SliderVolume_ValueChanged"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <!-- End Home -->
+        </Grid>
+    </Grid>
+</Window>
