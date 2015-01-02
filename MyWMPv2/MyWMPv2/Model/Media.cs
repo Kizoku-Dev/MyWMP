@@ -9,6 +9,8 @@ namespace MyWMPv2.Model
         private Uri _source;
         private MediaState _state;
         private String _progress;
+        private String _position;
+        private String _positionMax;
 
         public Uri Source
         {
@@ -36,8 +38,32 @@ namespace MyWMPv2.Model
                 if (value == "0")
                     _progress = "";
                 else
-                    _progress = "Buffering : "+value+"%";
+                    _progress = "Buffering : " + value + "%";
                 OnPropertyChanged("Progress");
+            }
+        }
+        public String Position
+        {
+            get { return _position; }
+            set
+            {
+                if (value == "00:00")
+                    _position = "";
+                else
+                    _position = value + "   /";
+                OnPropertyChanged("Position");
+            }
+        }
+        public String PositionMax
+        {
+            get { return _positionMax; }
+            set
+            {
+                if (value == "00:00")
+                    _positionMax = "";
+                else
+                    _positionMax = value;
+                OnPropertyChanged("PositionMax");
             }
         }
     }

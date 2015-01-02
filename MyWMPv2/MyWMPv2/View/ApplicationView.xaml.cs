@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using MyWMPv2.ViewModel;
 
 namespace MyWMPv2.View
@@ -12,6 +13,7 @@ namespace MyWMPv2.View
     {
         private readonly ApplicationViewModel _applicationViewModel;
         private bool _full = false;
+        private bool _fullMedia = false;
 
         public ApplicationView()
         {
@@ -51,6 +53,10 @@ namespace MyWMPv2.View
         private void Media_MediaOpened(object sender, RoutedEventArgs e)
         {
             _applicationViewModel.HomeViewModel.Media_MediaOpened(sender, e, Media, SliderMedia);
+        }
+        private void Media_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            _applicationViewModel.HomeViewModel.Media_MediaEnded(sender, e, Media, SliderMedia);
         }
         private void Buffering_Started(object sender, RoutedEventArgs e)
         {
@@ -150,11 +156,11 @@ namespace MyWMPv2.View
         }
         private void TreePlaylist_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            _applicationViewModel.HomeViewModel.TreePlaylist_DoubleClick(sender, e, Media, TreePlaylist);
+            _applicationViewModel.HomeViewModel.TreePlaylist_DoubleClick(sender, e, TreePlaylist);
         }
         private void Playlist_Start(object sender, RoutedEventArgs e)
         {
-            _applicationViewModel.HomeViewModel.Playlist_Start(sender, e, Media, TreePlaylist);
+            _applicationViewModel.HomeViewModel.Playlist_Start(sender, e, TreePlaylist);
         }
 
         /*

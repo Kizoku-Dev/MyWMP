@@ -74,8 +74,11 @@
                 </Grid.RowDefinitions>
 
                 <Grid Row="0" Background="Black">
-                    <MediaElement Name="Media" MediaOpened="Media_MediaOpened" BufferingStarted="Buffering_Started" BufferingEnded="Buffering_Ended"
-                                  Source="{Binding Path=HomeViewModel.Media.Source}" LoadedBehavior="{Binding Path=HomeViewModel.Media.State}" ></MediaElement>
+                    <MediaElement Name="Media" MediaOpened="Media_MediaOpened" MediaEnded="Media_MediaEnded"
+                                  BufferingStarted="Buffering_Started" BufferingEnded="Buffering_Ended"
+                                  Source="{Binding Path=HomeViewModel.Media.Source, Mode=TwoWay}"
+                                  LoadedBehavior="{Binding Path=HomeViewModel.Media.State, Mode=TwoWay}"
+                                  UnloadedBehavior="Close" ScrubbingEnabled="False"/>
                     <Label Name="Progress" Content="{Binding Path=HomeViewModel.Media.Progress}"
                            FontSize="40" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                     <!-- Music -->
@@ -135,7 +138,8 @@
                                 <TextBlock Text="{Binding Name}">
                                     <TextBlock.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Start the playlist" Click="Playlist_Start"/>
+                                            <MenuItem Header="Start the playlist" Click="Playlist_Start"
+                                                      CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
                                         </ContextMenu>
                                     </TextBlock.ContextMenu>
                                 </TextBlock>
@@ -175,6 +179,8 @@
                                 <Setter Property="MinWidth" Value="50"></Setter>
                             </Style>
                         </StackPanel.Resources>
+                        <Label Content="{Binding Path=HomeViewModel.Media.Position}" VerticalAlignment="Center"></Label>
+                        <Label Content="{Binding Path=HomeViewModel.Media.PositionMax}" VerticalAlignment="Center"></Label>
                         <Button Content="Open" Command="{Binding Path=HomeViewModel.MediaOpenCommand}">
                             <Button.ContextMenu>
                                 <ContextMenu>
@@ -186,7 +192,7 @@
                         <Button Content="Play" Command="{Binding Path=HomeViewModel.MediaPlayCommand}" />
                         <Button Content="Pause" Command="{Binding Path=HomeViewModel.MediaPauseCommand}" />
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center">Volume</Label>
-                        <Slider x:Name="SliderVolume" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125" Minimum="0" Maximum="1" Value="0.5"
+                        <Slider x:Name="SliderVolume" VerticalAlignment="Center" Width="125" Minimum="0" Maximum="1" Value="0.5"
                         ValueChanged="SliderVolume_ValueChanged"/>
                     </StackPanel>
                 </Grid>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,17 +14,25 @@ namespace MyWMPv2.Model
     {
         private readonly String _playlistsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MyWMPv2\\Playlists.xml";
         private PlaylistManager _me;
+        private List<String> _currentPlaylist;  
 
         public PlaylistManager()
         {
             _me = this;
+            _currentPlaylist = new List<string>();
+        }
+
+        public List<String> CurrentPlaylist
+        {
+            get { return _currentPlaylist; }
+            set { _currentPlaylist = value; }
         }
 
         private String ReadFile()
         {
             CheckFileExist();
             StringBuilder sb = new StringBuilder();
-            using (StreamReader sr = new StreamReader(this._playlistsPath))
+            using (StreamReader sr = new StreamReader(_playlistsPath))
             {
                 String line;
                 while ((line = sr.ReadLine()) != null)
@@ -42,7 +49,7 @@ namespace MyWMPv2.Model
             try
             {
                 XmlDocument doc = new XmlDocument();
-                doc.LoadXml(this.ReadFile());
+                doc.LoadXml(ReadFile());
                 XmlNode elemPath = doc.CreateNode(XmlNodeType.Element, "Path", doc.DocumentElement.NamespaceURI);
                 elemPath.InnerText = path;
                 XmlNode elemName = doc.CreateNode(XmlNodeType.Attribute, "name", doc.DocumentElement.NamespaceURI);
@@ -52,7 +59,7 @@ namespace MyWMPv2.Model
                 elemPlaylist.Attributes.SetNamedItem(elemName);
                 XmlElement root = doc.DocumentElement;
                 root.AppendChild(elemPlaylist);
-                using (StreamWriter w = new StreamWriter(this._playlistsPath, false, Encoding.UTF8))
+                using (StreamWriter w = new StreamWriter(_playlistsPath, false, Encoding.UTF8))
                 {
                     w.WriteLine(doc.OuterXml);
                 }
@@ -70,11 +77,11 @@ namespace MyWMPv2.Model
             try
             {
                 XmlDocument doc = new XmlDocument();
-                doc.LoadXml(this.ReadFile());
+                doc.LoadXml(ReadFile());
                 XmlNode node = doc.SelectSingleNode("/Playlists/Playlist[@name='" + name + "'][Path='" + path + "']");
                 Console.WriteLine("Deleting media : " + node.InnerXml);
                 node.ParentNode.RemoveChild(node);
-                doc.Save(this._playlistsPath);
+                doc.Save(_playlistsPath);
             }
             catch (Exception e)
             {
@@ -89,7 +96,7 @@ namespace MyWMPv2.Model
             try
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(this._playlistsPath);
+                xmlDoc.Load(_playlistsPath);
                 XmlNodeList nodes = xmlDoc.DocumentElement.SelectNodes("Playlist");
                 List<MyMedia> list = new List<MyMedia>();
                 foreach (XmlNode node in nodes)
@@ -105,8 +112,31 @@ namespace MyWMPv2.Model
             }
             catch (XmlException)
             {
-                File.Delete(this._playlistsPath);
+                File.Delete(_playlistsPath);
                 this.RefreshPlaylists(treePlaylist);
+            }
+        }
+
+        public void SetCurrentPlaylist(String playlistName)
+        {
+            CheckFileExist();
+            try
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(_playlistsPath);
+                XmlNodeList nodes = xmlDoc.DocumentElement.SelectNodes("Playlist");
+                _currentPlaylist.Clear();
+                foreach (XmlNode node in nodes)
+                {
+                    String name = node.Attributes["name"].Value;
+                    if (name.Equals(playlistName))
+                        _currentPlaylist.Add(node.SelectSingleNode("Path").InnerText.Replace("%20", " ").Replace("/", "\\"));
+                }
+            }
+            catch (XmlException)
+            {
+                File.Delete(_playlistsPath);
+                Console.WriteLine("Error setting current playlist");
             }
         }
 
@@ -136,9 +166,9 @@ namespace MyWMPv2.Model
         {
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MyWMPv2"))
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MyWMPv2");
-            if (File.Exists(this._playlistsPath))
+            if (File.Exists(_playlistsPath))
                 return;
-            new XDocument(new XElement("Playlists")).Save(this._playlistsPath);
+            new XDocument(new XElement("Playlists")).Save(_playlistsPath);
         }
     }
 }

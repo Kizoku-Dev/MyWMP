@@ -23,9 +23,11 @@ namespace MyWMPv2.ViewModel
         private ICommand _mediaPlayCommand;
         private ICommand _mediaPauseCommand;
         private ICommand _mediaStopCommand;
-        private bool _isDragging = false;
         private DispatcherTimer _timer;
         private DispatcherTimer _timerProgress;
+        private bool _isDragging = false;
+        private bool _isPlaylist = false;
+        private int _indexPlaylist;
 
         public HomeViewModel()
         {
@@ -45,15 +47,15 @@ namespace MyWMPv2.ViewModel
             {
                 case "MusicDoubleClick":
                     Media.Source = new Uri(MusicViewModel.ItemSelected);
-                    MediaPlay(null);
+                    MediaPlayNormal();
                     break;
                 case "VideoDoubleClick":
                     Media.Source = new Uri(VideoViewModel.ItemSelected);
-                    MediaPlay(null);
+                    MediaPlayNormal();
                     break;
                 case "ImageDoubleClick":
                     Media.Source = new Uri(ImageViewModel.ItemSelected);
-                    MediaPlay(null);
+                    MediaPlayNormal();
                     break;
                 default:
                     OnPropertyChanged(e.PropertyName);
@@ -134,13 +136,15 @@ namespace MyWMPv2.ViewModel
         private void timer_Tick(MediaElement media, Slider sliderMedia)
         {
             if (!_isDragging)
+            {
                 sliderMedia.Value = media.Position.TotalSeconds;
-            /*
-            if (media.IsBuffering)
-                Console.WriteLine("IS BUF");
-            else
-                Console.WriteLine("IS NOT BUF");
-             * */
+                if (media.NaturalDuration.HasTimeSpan)
+                {
+                    TimeSpan ts = media.Position;
+                    Media.Position = string.Format("{0:00}:{1:00}", (ts.Hours * 60) + ts.Minutes, ts.Seconds);
+                    media.Position.TotalSeconds.ToString();
+                }
+            }
         }
         private void MediaOpen(object sender)
         {
@@ -155,7 +159,7 @@ namespace MyWMPv2.ViewModel
                 ofd.ShowDialog();
                 if (ofd.FileName.Equals("")) return;
                 Media.Source = new Uri(ofd.FileName);
-                Media.State = MediaState.Play;
+                MediaPlayNormal();
                 Console.WriteLine("Media open success : " + ofd.FileName);
             }
             catch (Exception e)
@@ -167,6 +171,11 @@ namespace MyWMPv2.ViewModel
         private void MediaPlay(object sender)
         {
             Media.State = MediaState.Play;
+        }
+        private void MediaPlayNormal()
+        {
+            Media.State = MediaState.Play;
+            _isPlaylist = false;
         }
         private void MediaPause(object sender)
         {
@@ -194,11 +203,30 @@ namespace MyWMPv2.ViewModel
             if (media.NaturalDuration.HasTimeSpan)
             {
                 var ts = media.NaturalDuration.TimeSpan;
+                Media.PositionMax = string.Format("{0:00}:{1:00}", (ts.Hours * 60) + ts.Minutes, ts.Seconds);
                 sliderMedia.Maximum = ts.TotalSeconds;
                 sliderMedia.SmallChange = 1;
                 sliderMedia.LargeChange = Math.Min(10, ts.Seconds / 10);
             }
             _timer.Start();
+        }
+        public void Media_MediaEnded(object sender, RoutedEventArgs routedEventArgs, MediaElement media, Slider sliderMedia)
+        {
+            if (_isPlaylist)
+            {
+                ++_indexPlaylist;
+                if (_indexPlaylist >= _playlistManager.CurrentPlaylist.Count)
+                {
+                    _isPlaylist = false;
+                    Console.WriteLine("Playlist successfully finished !");
+                }
+                else
+                {
+                    Console.WriteLine("Playing : " + _playlistManager.CurrentPlaylist[_indexPlaylist]);
+                    Media.Source = new Uri(_playlistManager.CurrentPlaylist[_indexPlaylist]);
+                    MediaPlay(null);
+                }
+            }
         }
         public void Buffering_Started(object sender, RoutedEventArgs routedEventArgs, MediaElement media)
         {
@@ -248,21 +276,44 @@ namespace MyWMPv2.ViewModel
             _playlistManager.RefreshPlaylists(treePlaylist);
         }
         public void TreePlaylist_DoubleClick(object sender, MouseButtonEventArgs mouseButtonEventArgs,
-            MediaElement media, TreeView treePlaylist)
+            TreeView treePlaylist)
         {
             if (treePlaylist.SelectedItem.GetType() != typeof (MyMedia))
                 return;
             MyMedia item = (MyMedia)treePlaylist.SelectedItem;
             try
             {
+                Console.WriteLine("A : " + item.Path);
                 Media.Source = new Uri(item.Path);
-                Media.State = MediaState.Play;
+                MediaPlayNormal();
             }
             catch (Exception e) { Console.WriteLine("Error:"+e); }
         }
-        public void Playlist_Start(object sender, RoutedEventArgs e, MediaElement media, TreeView treePlaylist)
+        public void Playlist_Start(object sender, RoutedEventArgs e,
+            TreeView treePlaylist)
         {
-
+            MenuItem mi = sender as MenuItem;
+            if (mi != null)
+            {
+                ContextMenu cm = mi.CommandParameter as ContextMenu;
+                if (cm != null)
+                {
+                    TextBlock item = cm.PlacementTarget as TextBlock;
+                    if (item != null)
+                    {
+                        _isPlaylist = true;
+                        _indexPlaylist = 0;
+                        _playlistManager.SetCurrentPlaylist(item.Text);
+                        try
+                        {
+                            Console.WriteLine("Playing : " + _playlistManager.CurrentPlaylist[_indexPlaylist]);
+                            Media.Source = new Uri(_playlistManager.CurrentPlaylist[_indexPlaylist]);
+                            MediaPlay(null);
+                        }
+                        catch (Exception err) { Console.WriteLine("Error:" + err); }
+                    }
+                }
+            }
         }
 
         /*
@@ -278,7 +329,7 @@ namespace MyWMPv2.ViewModel
                 if (url != null && url.Uri != null && url.HasVideo)
                 {
                     Media.Source = url.Uri;
-                    Media.State = MediaState.Play;
+                    MediaPlayNormal();
                     Console.WriteLine("Open from youtube OK");
                 }
             }
