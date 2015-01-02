@@ -2,18 +2,23 @@
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MyWMPv2.Model;
 using MyWMPv2.Utilities;
 
 namespace MyWMPv2.ViewModel
 {
     class ApplicationViewModel : ObservableObject
     {
+        private TemplateEngine _templateEngine;
         private HomeViewModel _homeViewModel;
 
         public ApplicationViewModel(ListView listMusic, ListView listVideo, ListView listImage)
         {
+            _templateEngine = new TemplateEngine();
+            _templateEngine.SetNormalTheme();
             _homeViewModel = new HomeViewModel();
             _homeViewModel.PropertyChanged += (sender, arg) => PropertyChangedHandler(arg, listMusic, listVideo, listImage);
+            _templateEngine.PropertyChanged += (sender, arg) => PropertyChangedHandler(arg, listMusic, listVideo, listImage);
         }
 
         private void PropertyChangedHandler(PropertyChangedEventArgs e,
@@ -34,6 +39,12 @@ namespace MyWMPv2.ViewModel
                     OnPropertyChanged(e.PropertyName);
                     break;
             }
+        }
+
+        public TemplateEngine TE
+        {
+            get { return _templateEngine; }
+            set { _templateEngine = value; }
         }
 
         public HomeViewModel HomeViewModel

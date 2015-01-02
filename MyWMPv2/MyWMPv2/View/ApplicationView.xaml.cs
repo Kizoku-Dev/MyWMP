@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -45,6 +46,18 @@ namespace MyWMPv2.View
                     WindowState = WindowState.Maximized;
                 _full = !_full;
             }
+        }
+
+        /*
+         * Menu
+         */
+        private void Theme1_Click(object sender, RoutedEventArgs e)
+        {
+            _applicationViewModel.TE.SetNormalTheme();
+        }
+        private void Theme2_Click(object sender, RoutedEventArgs e)
+        {
+            _applicationViewModel.TE.Set1337Theme();
         }
 
         /*

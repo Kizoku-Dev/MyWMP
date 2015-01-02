@@ -42,6 +42,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Antlr4.StringTemplate.dll" size="296448">
+      <assemblyIdentity name="Antlr4.StringTemplate" version="4.0.6.9004" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>VEEf7A+7/mqm+FBCRthSAyelWZKHEq0NGwMmZo5RBTY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyToolkit.dll" size="182272">
       <assemblyIdentity name="MyToolkit" version="2.3.22.0" publicKeyToken="3E349A1360994D26" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -66,14 +78,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyWMPv2.exe" size="68608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyWMPv2.exe" size="142848">
       <assemblyIdentity name="MyWMPv2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8HT/cVGLU7rirn0U4j/qFK8omhEHrv3FwFytGg8dhMk=</dsig:DigestValue>
+        <dsig:DigestValue>mKmQIuFZoMfQUWzI3E8ovZA1Uh7RKSt+JD5EeJhmOCY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

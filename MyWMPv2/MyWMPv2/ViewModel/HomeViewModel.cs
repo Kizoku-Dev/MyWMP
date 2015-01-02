@@ -23,6 +23,8 @@ namespace MyWMPv2.ViewModel
         private ICommand _mediaPlayCommand;
         private ICommand _mediaPauseCommand;
         private ICommand _mediaStopCommand;
+        private Visibility _playVisibility;
+        private Visibility _pauseVisibility;
         private DispatcherTimer _timer;
         private DispatcherTimer _timerProgress;
         private bool _isDragging = false;
@@ -39,6 +41,8 @@ namespace MyWMPv2.ViewModel
             _musicViewModel.PropertyChanged += PropertyChangedHandler;
             _videoViewModel.PropertyChanged += PropertyChangedHandler;
             _imageViewModel.PropertyChanged += PropertyChangedHandler;
+            _playVisibility = Visibility.Visible;
+            _pauseVisibility = Visibility.Collapsed;
         }
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -124,6 +128,24 @@ namespace MyWMPv2.ViewModel
                 return _mediaStopCommand;
             }
         }
+        public Visibility PlayVisibility
+        {
+            get { return _playVisibility; }
+            set
+            {
+                _playVisibility = value;
+                OnPropertyChanged("PlayVisibility");
+            }
+        }
+        public Visibility PauseVisibility
+        {
+            get { return _pauseVisibility; }
+            set
+            {
+                _pauseVisibility = value;
+                OnPropertyChanged("PauseVisibility");
+            }
+        }
 
         public void Init(MediaElement media, Slider sliderMedia)
         {
@@ -171,19 +193,27 @@ namespace MyWMPv2.ViewModel
         private void MediaPlay(object sender)
         {
             Media.State = MediaState.Play;
+            PlayVisibility = Visibility.Collapsed;
+            PauseVisibility = Visibility.Visible;
         }
         private void MediaPlayNormal()
         {
             Media.State = MediaState.Play;
             _isPlaylist = false;
+            PlayVisibility = Visibility.Collapsed;
+            PauseVisibility = Visibility.Visible;
         }
         private void MediaPause(object sender)
         {
             Media.State = MediaState.Pause;
+            PlayVisibility = Visibility.Visible;
+            PauseVisibility = Visibility.Collapsed;
         }
         private void MediaStop(object sender)
         {
             Media.State = MediaState.Stop;
+            PlayVisibility = Visibility.Visible;
+            PauseVisibility = Visibility.Collapsed;
         }
         private void timerProgress_Tick(MediaElement media)
         {
@@ -275,19 +305,22 @@ namespace MyWMPv2.ViewModel
             _playlistManager.AddElem(playlistName, media.Source.AbsolutePath);
             _playlistManager.RefreshPlaylists(treePlaylist);
         }
-        public void TreePlaylist_DoubleClick(object sender, MouseButtonEventArgs mouseButtonEventArgs,
+        public void TreePlaylist_DoubleClick(object sender, MouseButtonEventArgs e,
             TreeView treePlaylist)
         {
             if (treePlaylist.SelectedItem.GetType() != typeof (MyMedia))
                 return;
-            MyMedia item = (MyMedia)treePlaylist.SelectedItem;
+            MyMedia item = (MyMedia) treePlaylist.SelectedItem;
             try
             {
-                Console.WriteLine("A : " + item.Path);
+                Console.WriteLine("Double Click Playing : " + item.Path);
                 Media.Source = new Uri(item.Path);
                 MediaPlayNormal();
             }
-            catch (Exception e) { Console.WriteLine("Error:"+e); }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error:" + err);
+            }
         }
         public void Playlist_Start(object sender, RoutedEventArgs e,
             TreeView treePlaylist)

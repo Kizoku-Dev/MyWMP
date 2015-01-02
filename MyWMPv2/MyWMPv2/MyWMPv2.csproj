@@ -69,6 +69,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
     <Reference Include="MyToolkit">
       <HintPath>..\packages\MyToolkit.2.3.22.0\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll</HintPath>
     </Reference>
@@ -112,6 +115,7 @@
     <Compile Include="Model\MyVideo.cs" />
     <Compile Include="Model\MyMusic.cs" />
     <Compile Include="Model\PlaylistManager.cs" />
+    <Compile Include="Model\TemplateEngine.cs" />
     <Compile Include="Utilities\SortLibrary.cs" />
     <Compile Include="Model\Media.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -183,6 +187,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\wmp1337.png" />
+    <Resource Include="View\Resources\wmpbigtasti.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
