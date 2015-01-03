@@ -25,12 +25,16 @@ namespace MyWMPv2.ViewModel
         private ICommand _mediaStopCommand;
         private ICommand _mediaPrevCommand;
         private ICommand _mediaNextCommand;
+        private ICommand _mediaRepeatCommand;
         private Visibility _playVisibility;
         private Visibility _pauseVisibility;
         private Visibility _playlistVisibility;
+        private Visibility _repeatVisibility;
+        private Visibility _noRepeatVisibility;
         private DispatcherTimer _timer;
         private DispatcherTimer _timerProgress;
         private bool _isDragging = false;
+        private bool _isRepeat = false;
         private bool _isPlaylist = false;
         private int _indexPlaylist;
 
@@ -47,6 +51,8 @@ namespace MyWMPv2.ViewModel
             _playVisibility = Visibility.Visible;
             _pauseVisibility = Visibility.Collapsed;
             _playlistVisibility = Visibility.Collapsed;
+            _repeatVisibility = Visibility.Collapsed;
+            _noRepeatVisibility = Visibility.Visible;
         }
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -150,6 +156,15 @@ namespace MyWMPv2.ViewModel
                 return _mediaNextCommand;
             }
         }
+        public ICommand MediaRepeatCommand
+        {
+            get
+            {
+                if (_mediaRepeatCommand == null)
+                    _mediaRepeatCommand = new DelegateCommand(MediaRepeat);
+                return _mediaRepeatCommand;
+            }
+        }
         public Visibility PlayVisibility
         {
             get { return _playVisibility; }
@@ -175,6 +190,24 @@ namespace MyWMPv2.ViewModel
             {
                 _playlistVisibility = value;
                 OnPropertyChanged("PlaylistVisibility");
+            }
+        }
+        public Visibility RepeatVisibility
+        {
+            get { return _repeatVisibility; }
+            set
+            {
+                _repeatVisibility = value;
+                OnPropertyChanged("RepeatVisibility");
+            }
+        }
+        public Visibility NoRepeatVisibility
+        {
+            get { return _noRepeatVisibility; }
+            set
+            {
+                _noRepeatVisibility = value;
+                OnPropertyChanged("NoRepeatVisibility");
             }
         }
 
@@ -262,6 +295,21 @@ namespace MyWMPv2.ViewModel
             Media.State = MediaState.Close;
             Media_MediaEnded();
         }
+        private void MediaRepeat(object sender)
+        {
+            if (_isRepeat)
+            {
+                RepeatVisibility = Visibility.Collapsed;
+                NoRepeatVisibility = Visibility.Visible;
+            }
+            else
+            {
+                RepeatVisibility = Visibility.Visible;
+                NoRepeatVisibility = Visibility.Collapsed;
+            }
+            _isRepeat = !_isRepeat;
+        }
+
         private void timerProgress_Tick(MediaElement media)
         {
             Media.Progress = (media.BufferingProgress * 100).ToString();
@@ -304,6 +352,11 @@ namespace MyWMPv2.ViewModel
                     Media.Source = new Uri(_playlistManager.CurrentPlaylist[_indexPlaylist]);
                     MediaPlay(null);
                 }
+            }
+            else if (_isRepeat)
+            {
+                MediaStop(null);
+                MediaPlay(null);
             }
         }
         public void Buffering_Started(object sender, RoutedEventArgs routedEventArgs, MediaElement media)

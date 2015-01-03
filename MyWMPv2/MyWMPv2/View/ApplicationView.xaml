@@ -116,6 +116,8 @@
         </Grid.RowDefinitions>
 
         <Grid Row="0" Background="{Binding Path=TE.BgWindow1}" MouseDown="DragWindow" MouseLeftButtonDown="TopClick">
+            <Label Content="{Binding Path=HomeViewModel.Media.SourceString}" FontSize="12" Foreground="{Binding Path=TE.FgTitle}"
+                   FontFamily="Resources/Fonts/Gravity-Regular.ttf#Gravity" VerticalAlignment="Center" Padding="0,3,0,0"></Label>
             <Label Content="{Binding Path=TE.Title}" FontFamily="Resources/Fonts/Gravity-Bold.ttf#Gravity" FontSize="17"
                    HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,0" Foreground="{Binding Path=TE.FgTitle}"/>
             <Button Command="{Binding Path=CloseWindowCommand}"
@@ -143,7 +145,11 @@
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Select the directory" Click="Music_Directory"/>
+                            <MenuItem Header="Select the directory" Click="Music_Directory">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/reload-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -153,7 +159,11 @@
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Select the directory" Click="Video_Directory"/>
+                            <MenuItem Header="Select the directory" Click="Video_Directory">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/reload-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -163,7 +173,11 @@
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Select the directory" Click="Image_Directory"/>
+                            <MenuItem Header="Select the directory" Click="Image_Directory">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/reload-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -173,7 +187,11 @@
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Add current media to a playlist" Click="Playlist_Add"/>
+                            <MenuItem Header="Add current media to a playlist" Click="Playlist_Add">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/plus-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -257,7 +275,11 @@
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Start the playlist" Click="Playlist_Start"
-                                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+                                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}">
+                                            <MenuItem.Icon>
+                                                <Image Source="Resources/Images/play-black.png" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -269,7 +291,11 @@
                                         <ContextMenu>
                                             <MenuItem Name="MediaItem" Header="Delete from playlist"
                                                       Command="{Binding Path=DeleteSelfCommand}"
-                                                      CommandParameter="{Binding Path=PlaylistPath}"/>
+                                                      CommandParameter="{Binding Path=PlaylistPath}">
+                                                <MenuItem.Icon>
+                                                    <Image Source="Resources/Images/x-black.png" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
                                         </ContextMenu>
                                     </TextBlock.ContextMenu>
                                 </TextBlock>
@@ -298,16 +324,28 @@
                             <Setter Property="MinWidth" Value="50"></Setter>
                         </Style>
                     </StackPanel.Resources>
-                    <Separator Opacity="0" Width="10" />
                     <Label Content="{Binding Path=HomeViewModel.Media.Position}" VerticalAlignment="Center" Foreground="{Binding Path=TE.FgTitle}"
                            FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"></Label>
                     <Label Content="{Binding Path=HomeViewModel.Media.PositionMax}" VerticalAlignment="Center" Foreground="{Binding Path=TE.FgTitle}"
                            FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"></Label>
-                    <Separator Opacity="0" Width="50" />
+                    <Separator Opacity="0" Width="20" />
+                    <Button Command="{Binding Path=HomeViewModel.MediaRepeatCommand}" Visibility="{Binding Path=HomeViewModel.NoRepeatVisibility}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgLoop1}" />
+                    </Button>
+                    <Button Command="{Binding Path=HomeViewModel.MediaRepeatCommand}" Visibility="{Binding Path=HomeViewModel.RepeatVisibility}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgLoop2}" />
+                    </Button>
+                    <Separator Opacity="0" Width="20" />
                     <Button Command="{Binding Path=HomeViewModel.MediaOpenCommand}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Open youtube video" Click="Open_Youtube"/>
+                                <MenuItem Header="Open youtube video" Click="Open_Youtube">
+                                    <MenuItem.Icon>
+                                        <Image Source="Resources/Images/youtube-ico.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </ContextMenu>
                         </Button.ContextMenu>
                         <Image Source="{Binding Path=TE.ImgOpen}" />

@@ -24,7 +24,9 @@ namespace ExtendedTheme
             "Resources/Images/file-white.png", // media open
             "Resources/Images/x-white.png", // close
             "Resources/Images/backward-white.png", // media prev
-            "Resources/Images/forward-white.png" // media next
+            "Resources/Images/forward-white.png", // media next
+            "Resources/Images/loop-white.png", // media loop1
+            "Resources/Images/loop2-white.png" // media loop2
         };
 
         public String GetThemeString(int index)

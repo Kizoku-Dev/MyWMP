@@ -230,6 +230,21 @@
   <ItemGroup>
     <Resource Include="View\Resources\Images\wmpdoge.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\Images\loop-black.png" />
+    <Resource Include="View\Resources\Images\loop-white.png" />
+    <Resource Include="View\Resources\Images\loop2-black.png" />
+    <Resource Include="View\Resources\Images\loop2-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\Images\youtube-ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\Images\reload-black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\Images\plus-black.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

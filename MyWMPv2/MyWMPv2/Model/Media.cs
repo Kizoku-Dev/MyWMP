@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Controls;
 using MyWMPv2.Utilities;
 
@@ -7,6 +8,7 @@ namespace MyWMPv2.Model
     class Media : ObservableObject
     {
         private Uri _source;
+        private String _sourceString;
         private MediaState _state;
         private String _progress;
         private String _position;
@@ -18,7 +20,17 @@ namespace MyWMPv2.Model
             set
             {
                 _source = value;
+                SourceString = Path.GetFileNameWithoutExtension(_source.OriginalString);
                 OnPropertyChanged("Source");
+            }
+        }
+        public String SourceString
+        {
+            get { return _sourceString; }
+            set
+            {
+                _sourceString = "Playing : \""+value+"\"";
+                OnPropertyChanged("SourceString");
             }
         }
         public MediaState State
