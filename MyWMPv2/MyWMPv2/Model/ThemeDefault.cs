@@ -46,6 +46,8 @@ namespace MyWMPv2.Model
          * [33] = image stop
          * [34] = image open
          * [35] = image close
+         * [36] = image prev
+         * [37] = image next
          */
         private List<String> _elems = new List<String>()
         {
@@ -61,7 +63,10 @@ namespace MyWMPv2.Model
             "Resources/Images/pause-black.png", // media pause
             "Resources/Images/stop-black.png", // media stop
             "Resources/Images/file-black.png", // media open
-            "Resources/Images/x-black.png" // media open
+            "Resources/Images/x-black.png", // close
+            "Resources/Images/backward-black.png", // media prev
+            "Resources/Images/forward-black.png" // media next
+
         };
 
         public List<String> Elems

@@ -80,7 +80,8 @@ namespace MyWMPv2.Model
             {
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(ReadFile());
-                XmlNode node = doc.SelectSingleNode("/Playlists/Playlist[@name='" + name + "'][Path='" + path + "']");
+                //xpath
+                XmlNode node = doc.SelectSingleNode("/Playlists/Playlist[@name='" + name + "'][Path=\"" + path + "\"]");
                 Console.WriteLine("Deleting media : " + node.InnerXml);
                 node.ParentNode.RemoveChild(node);
                 doc.Save(_playlistsPath);

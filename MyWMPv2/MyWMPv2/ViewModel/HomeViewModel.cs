@@ -23,8 +23,11 @@ namespace MyWMPv2.ViewModel
         private ICommand _mediaPlayCommand;
         private ICommand _mediaPauseCommand;
         private ICommand _mediaStopCommand;
+        private ICommand _mediaPrevCommand;
+        private ICommand _mediaNextCommand;
         private Visibility _playVisibility;
         private Visibility _pauseVisibility;
+        private Visibility _playlistVisibility;
         private DispatcherTimer _timer;
         private DispatcherTimer _timerProgress;
         private bool _isDragging = false;
@@ -43,6 +46,7 @@ namespace MyWMPv2.ViewModel
             _imageViewModel.PropertyChanged += PropertyChangedHandler;
             _playVisibility = Visibility.Visible;
             _pauseVisibility = Visibility.Collapsed;
+            _playlistVisibility = Visibility.Collapsed;
         }
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -128,6 +132,24 @@ namespace MyWMPv2.ViewModel
                 return _mediaStopCommand;
             }
         }
+        public ICommand MediaPrevCommand
+        {
+            get
+            {
+                if (_mediaPrevCommand == null)
+                    _mediaPrevCommand = new DelegateCommand(MediaPrev);
+                return _mediaPrevCommand;
+            }
+        }
+        public ICommand MediaNextCommand
+        {
+            get
+            {
+                if (_mediaNextCommand == null)
+                    _mediaNextCommand = new DelegateCommand(MediaNext);
+                return _mediaNextCommand;
+            }
+        }
         public Visibility PlayVisibility
         {
             get { return _playVisibility; }
@@ -144,6 +166,15 @@ namespace MyWMPv2.ViewModel
             {
                 _pauseVisibility = value;
                 OnPropertyChanged("PauseVisibility");
+            }
+        }
+        public Visibility PlaylistVisibility
+        {
+            get { return _playlistVisibility; }
+            set
+            {
+                _playlistVisibility = value;
+                OnPropertyChanged("PlaylistVisibility");
             }
         }
 
@@ -202,6 +233,7 @@ namespace MyWMPv2.ViewModel
             _isPlaylist = false;
             PlayVisibility = Visibility.Collapsed;
             PauseVisibility = Visibility.Visible;
+            PlaylistVisibility = Visibility.Collapsed;
         }
         private void MediaPause(object sender)
         {
@@ -214,6 +246,21 @@ namespace MyWMPv2.ViewModel
             Media.State = MediaState.Stop;
             PlayVisibility = Visibility.Visible;
             PauseVisibility = Visibility.Collapsed;
+        }
+        private void MediaPrev(object sender)
+        {
+            if (_indexPlaylist != 0)
+            {
+                --_indexPlaylist;
+                Console.WriteLine("Playing : " + _playlistManager.CurrentPlaylist[_indexPlaylist]);
+                Media.Source = new Uri(_playlistManager.CurrentPlaylist[_indexPlaylist]);
+                MediaPlay(null);
+            }
+        }
+        private void MediaNext(object sender)
+        {
+            Media.State = MediaState.Close;
+            Media_MediaEnded();
         }
         private void timerProgress_Tick(MediaElement media)
         {
@@ -240,7 +287,7 @@ namespace MyWMPv2.ViewModel
             }
             _timer.Start();
         }
-        public void Media_MediaEnded(object sender, RoutedEventArgs routedEventArgs, MediaElement media, Slider sliderMedia)
+        public void Media_MediaEnded()
         {
             if (_isPlaylist)
             {
@@ -248,6 +295,7 @@ namespace MyWMPv2.ViewModel
                 if (_indexPlaylist >= _playlistManager.CurrentPlaylist.Count)
                 {
                     _isPlaylist = false;
+                    PlaylistVisibility = Visibility.Collapsed;
                     Console.WriteLine("Playlist successfully finished !");
                 }
                 else
@@ -335,6 +383,7 @@ namespace MyWMPv2.ViewModel
                     if (item != null)
                     {
                         _isPlaylist = true;
+                        PlaylistVisibility = Visibility.Visible;
                         _indexPlaylist = 0;
                         _playlistManager.SetCurrentPlaylist(item.Text);
                         try

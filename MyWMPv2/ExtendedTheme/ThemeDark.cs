@@ -22,7 +22,9 @@ namespace ExtendedTheme
             "Resources/Images/pause-white.png", // media pause
             "Resources/Images/stop-white.png", // media stop
             "Resources/Images/file-white.png", // media open
-            "Resources/Images/x-white.png" // media open
+            "Resources/Images/x-white.png", // close
+            "Resources/Images/backward-white.png", // media prev
+            "Resources/Images/forward-white.png" // media next
         };
 
         public String GetThemeString(int index)

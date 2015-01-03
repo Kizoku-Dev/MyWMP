@@ -65,7 +65,7 @@ namespace MyWMPv2.View
         }
         private void Media_MediaEnded(object sender, RoutedEventArgs e)
         {
-            _applicationViewModel.HomeViewModel.Media_MediaEnded(sender, e, Media, SliderMedia);
+            _applicationViewModel.HomeViewModel.Media_MediaEnded();
         }
         private void Buffering_Started(object sender, RoutedEventArgs e)
         {

@@ -312,7 +312,11 @@
                         </Button.ContextMenu>
                         <Image Source="{Binding Path=TE.ImgOpen}" />
                     </Button>
-                    <Separator Opacity="0" Width="30" />
+                    <Separator Opacity="0" Width="20" />
+                    <Button Command="{Binding Path=HomeViewModel.MediaPrevCommand}" Visibility="{Binding Path=HomeViewModel.PlaylistVisibility}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgPrev}" />
+                    </Button>
                     <Button Command="{Binding Path=HomeViewModel.MediaStopCommand}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Image Source="{Binding Path=TE.ImgStop}" />
                     </Button>
@@ -323,6 +327,10 @@
                     <Button Command="{Binding Path=HomeViewModel.MediaPauseCommand}" Visibility="{Binding Path=HomeViewModel.PauseVisibility}"
                             Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Image Source="{Binding Path=TE.ImgPause}" />
+                    </Button>
+                    <Button Command="{Binding Path=HomeViewModel.MediaNextCommand}" Visibility="{Binding Path=HomeViewModel.PlaylistVisibility}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgNext}" />
                     </Button>
                     <Separator Opacity="0" Width="50" />
                     <Slider x:Name="SliderVolume" VerticalAlignment="Center" Width="125" Minimum="0" Maximum="1" Value="0.5"

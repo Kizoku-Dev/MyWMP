@@ -16,7 +16,7 @@ namespace MyWMPv2.Model
 
         private readonly List<Template> _elems;
         private readonly List<ThemeElem> _currentTheme;
-        private const int _nbElem = 36;
+        private const int _nbElem = 38;
         private readonly String _themePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MyWMPv2\\Themes";
         private readonly ThemeDefault _default = new ThemeDefault();
         public TemplateEngine()
@@ -74,6 +74,8 @@ namespace MyWMPv2.Model
         public String ImgStop { get { return _elems[33].Render(); } set { } }
         public String ImgOpen { get { return _elems[34].Render(); } set { } }
         public String ImgClose { get { return _elems[35].Render(); } set { } }
+        public String ImgPrev { get { return _elems[36].Render(); } set { } }
+        public String ImgNext { get { return _elems[37].Render(); } set { } }
         public List<ThemeElem> CurrentTheme { get { return _currentTheme; } }
         
         public void SetTheme(String theme)
@@ -145,6 +147,8 @@ namespace MyWMPv2.Model
             OnPropertyChanged("ImgStop");
             OnPropertyChanged("ImgOpen");
             OnPropertyChanged("ImgClose");
+            OnPropertyChanged("ImgPrev");
+            OnPropertyChanged("ImgNext");
         }
 
         private void CleanTemplates()
