@@ -1,0 +1,14 @@
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\ExtendedTheme.dll
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\ExtendedTheme.pdb
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\MyWMPv2.exe
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\Antlr4.StringTemplate.dll
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\taglib-sharp.dll
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\MyToolkit.Extended.dll
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\MyToolkit.dll
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\MyWMPv2.pdb
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\Antlr4.StringTemplate.pdb
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\MyToolkit.Extended.xml
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\bin\Debug\MyToolkit.xml
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\obj\Debug\ExtendedTheme.csprojResolveAssemblyReference.cache
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\obj\Debug\ExtendedTheme.dll
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\ExtendedTheme\obj\Debug\ExtendedTheme.pdb

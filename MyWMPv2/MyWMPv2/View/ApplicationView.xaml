@@ -1,0 +1,337 @@
+﻿<Window x:Class="MyWMPv2.View.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Model="clr-namespace:MyWMPv2.Model"
+        Title="ApplicationView" Height="720" Width="1280"
+        WindowStyle="None" MinHeight="560" MinWidth="640">
+
+    <!-- //////////////////////// STYLES //////////////////////// -->
+    <Window.Resources>
+        <!-- Slider -->
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  BorderThickness="1" BorderBrush="black" Background="black" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="{Binding Path=TE.ColorSlider1}"  BorderThickness="1" BorderBrush="{Binding Path=TE.ColorSlider2}" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse Height="10" Width="10" Fill="{Binding Path=TE.ColorSlider1}"></Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="HorizontalSlider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- ListView -->
+        <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="{Binding Path=TE.BgList}"></Setter>
+        </Style>
+        <Style x:Key="ListViewHeader" TargetType="{x:Type GridViewColumnHeader}" >
+            <Setter Property="FontFamily" Value="Resources/Fonts/Gravity-Book.ttf#Gravity"></Setter>
+            <Setter Property="Background" Value="{Binding Path=TE.BgList}"></Setter>
+            <Setter Property="Foreground" Value="{Binding Path=TE.FgList}"></Setter>
+        </Style>
+        <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="FontFamily" Value="Resources/Fonts/Gravity-Book.ttf#Gravity"></Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{Binding Path=FgList}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- TreeView -->
+        <Style x:Key="TreeViewStyle" TargetType="{x:Type TreeView}">
+            <Setter Property="Background" Value="{Binding Path=TE.BgList}"></Setter>
+        </Style>
+        <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="FontFamily" Value="Resources/Fonts/Gravity-Book.ttf#Gravity"></Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{Binding Path=FgList}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <!-- //////////////////////// END STYLES //////////////////////// -->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Row="0" Background="{Binding Path=TE.BgWindow1}" MouseDown="DragWindow" MouseLeftButtonDown="TopClick">
+            <Label Content="{Binding Path=TE.Title}" FontFamily="Resources/Fonts/Gravity-Bold.ttf#Gravity" FontSize="17"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,0" Foreground="{Binding Path=TE.FgTitle}"/>
+            <Button Command="{Binding Path=CloseWindowCommand}"
+                    Height="20" Width="auto" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" >
+                <Image Source="{Binding Path=TE.ImgClose}" />
+            </Button>
+        </Grid>
+
+        <Grid Row="1" Background="{Binding Path=TE.BgWindow2}" MouseDown="DragWindow" MouseLeftButtonDown="TopClick">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Content="{Binding Path=TE.ChangeTheme}" Click="ChangeTheme_Click" VerticalAlignment="Center" Padding="40,3,40,0"
+                        Background="{Binding Path=TE.BgButton}" Foreground="{Binding Path=TE.FgButton}"
+                        FontSize="15" FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Row="2" Background="{Binding Path=TE.BgWindow3}" MouseDown="DragWindow" MouseLeftButtonDown="TopClick">
+            <!-- Menu -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Content="{Binding Path=TE.Music}" Click="Music_Click" VerticalAlignment="Center" Padding="20,3,20,0"
+                        Background="{Binding Path=TE.BgButton}" Foreground="{Binding Path=TE.FgButton}"
+                        FontSize="15" FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Select the directory" Click="Music_Directory"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Content="{Binding Path=TE.Video}" Click="Video_Click" VerticalAlignment="Center" Padding="20,3,20,0"
+                        Background="{Binding Path=TE.BgButton}" Foreground="{Binding Path=TE.FgButton}"
+                        FontSize="15" FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Select the directory" Click="Video_Directory"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Content="{Binding Path=TE.Image}" Click="Image_Click" VerticalAlignment="Center" Padding="20,3,20,0"
+                        Background="{Binding Path=TE.BgButton}" Foreground="{Binding Path=TE.FgButton}"
+                        FontSize="15" FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Select the directory" Click="Image_Directory"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Content="{Binding Path=TE.Playlist}" Click="Playlist_Click" VerticalAlignment="Center" Padding="20,3,20,0"
+                        Background="{Binding Path=TE.BgButton}" Foreground="{Binding Path=TE.FgButton}"
+                        FontSize="15" FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Add current media to a playlist" Click="Playlist_Add"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </StackPanel>
+            <!-- End Menu -->
+        </Grid>
+        
+        <Grid Row="3">
+            <!-- Home -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <Grid Row="0" Background="{Binding Path=TE.BgWindow4}">
+                <MediaElement Name="Media" MediaOpened="Media_MediaOpened" MediaEnded="Media_MediaEnded"
+                              BufferingStarted="Buffering_Started" BufferingEnded="Buffering_Ended"
+                              Source="{Binding Path=HomeViewModel.Media.Source, Mode=TwoWay}"
+                              LoadedBehavior="{Binding Path=HomeViewModel.Media.State, Mode=TwoWay}"
+                              UnloadedBehavior="Close"/>
+                <Label Name="Progress" Content="{Binding Path=HomeViewModel.Media.Progress}"
+                       FontSize="40" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Image Source="{Binding Path=TE.ImgLogo}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Visibility="{Binding Path=HomeViewModel.PlayVisibility}" MaxWidth="150" Height="auto"></Image>
+                <!-- Music -->
+                <ListView Name="ListMusic" ButtonBase.Click="ListMusic_Click" Visibility="Collapsed" Style="{StaticResource ListViewStyle}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource ListViewHeader}">
+                            <GridViewColumn Header="{Binding Path=TE.ListMusicFilename}" Width="300" DisplayMemberBinding="{Binding Path=Filename}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListMusicTitle}" Width="300" DisplayMemberBinding="{Binding Path=Title}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListMusicAlbum}" Width="200" DisplayMemberBinding="{Binding Path=Album}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListMusicAuthor}" Width="200" DisplayMemberBinding="{Binding Path=Author}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListMusicLength}" Width="150" DisplayMemberBinding="{Binding Path=Length}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemStyle}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ListMusic_DoubleClick" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <!-- End Music -->
+                <!-- Video -->
+                <ListView Name="ListVideo" ButtonBase.Click="ListVideo_Click" Visibility="Collapsed" Style="{StaticResource ListViewStyle}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource ListViewHeader}">
+                            <GridViewColumn Header="{Binding Path=TE.ListVideoFilename}" Width="200" DisplayMemberBinding="{Binding Filename}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListVideoHeight}" Width="150" DisplayMemberBinding="{Binding Height}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListVideoWidth}" Width="150" DisplayMemberBinding="{Binding Width}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListVideoLength}" Width="150" DisplayMemberBinding="{Binding Length}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemStyle}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ListVideo_DoubleClick" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <!-- End Video -->
+                <!-- Image -->
+                <ListView Name="ListImage" ButtonBase.Click="ListImage_Click" Visibility="Collapsed" Style="{StaticResource ListViewStyle}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource ListViewHeader}">
+                            <GridViewColumn Header="{Binding Path=TE.ListImageFilename}" Width="300" DisplayMemberBinding="{Binding Filename}" />
+                            <GridViewColumn Header="{Binding Path=TE.ListImagePath}" Width="500" DisplayMemberBinding="{Binding Path}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemStyle}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ListImage_DoubleClick" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <!-- End Image -->
+                <!-- Playlist -->
+                <TreeView Name="TreePlaylist" HorizontalAlignment="Right" MinWidth="100" Visibility="Collapsed" Style="{StaticResource TreeViewStyle}">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type Model:MyPlaylist}" ItemsSource="{Binding Medias}">
+                            <TextBlock Text="{Binding Name}">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Start the playlist" Click="Playlist_Start"
+                                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type Model:MyMedia}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Name="MediaItem" Header="Delete from playlist"
+                                                      Command="{Binding Path=DeleteSelfCommand}"
+                                                      CommandParameter="{Binding Path=PlaylistPath}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItemStyle}">
+                        <EventSetter Event="MouseDoubleClick" Handler="TreePlaylist_DoubleClick" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                </TreeView>
+                <!-- End Playlist -->
+            </Grid>
+
+            <Grid Row="1" Background="{Binding Path=TE.BgWindow5}">
+                <Slider x:Name="SliderMedia" HorizontalAlignment="Stretch" VerticalAlignment="Center" Minimum="0"
+                        Thumb.DragStarted="SliderMedia_MouseDown" Thumb.DragCompleted="SliderMedia_MouseUp"
+                        Style="{StaticResource HorizontalSlider}"/>
+            </Grid>
+
+            <Grid Row="2" Background="{Binding Path=TE.BgWindow6}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="MinWidth" Value="50"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Separator Opacity="0" Width="10" />
+                    <Label Content="{Binding Path=HomeViewModel.Media.Position}" VerticalAlignment="Center" Foreground="{Binding Path=TE.FgTitle}"
+                           FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"></Label>
+                    <Label Content="{Binding Path=HomeViewModel.Media.PositionMax}" VerticalAlignment="Center" Foreground="{Binding Path=TE.FgTitle}"
+                           FontFamily="Resources/Fonts/Gravity-Book.ttf#Gravity"></Label>
+                    <Separator Opacity="0" Width="50" />
+                    <Button Command="{Binding Path=HomeViewModel.MediaOpenCommand}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Open youtube video" Click="Open_Youtube"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                        <Image Source="{Binding Path=TE.ImgOpen}" />
+                    </Button>
+                    <Separator Opacity="0" Width="30" />
+                    <Button Command="{Binding Path=HomeViewModel.MediaStopCommand}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgStop}" />
+                    </Button>
+                    <Button Command="{Binding Path=HomeViewModel.MediaPlayCommand}" Visibility="{Binding Path=HomeViewModel.PlayVisibility}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgPlay}" />
+                    </Button>
+                    <Button Command="{Binding Path=HomeViewModel.MediaPauseCommand}" Visibility="{Binding Path=HomeViewModel.PauseVisibility}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Image Source="{Binding Path=TE.ImgPause}" />
+                    </Button>
+                    <Separator Opacity="0" Width="50" />
+                    <Slider x:Name="SliderVolume" VerticalAlignment="Center" Width="125" Minimum="0" Maximum="1" Value="0.5"
+                            ValueChanged="SliderVolume_ValueChanged"
+                            Style="{StaticResource HorizontalSlider}"/>
+                    <Separator Opacity="0" Width="50" />
+                </StackPanel>
+            </Grid>
+            <!-- End Home -->
+        </Grid>
+    </Grid>
+</Window>
