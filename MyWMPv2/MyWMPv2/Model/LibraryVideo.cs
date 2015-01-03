@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using MyWMPv2.Utilities;
 using File = TagLib.File;
 
@@ -59,6 +58,11 @@ namespace MyWMPv2.Model
                 Console.WriteLine("Error taglib");
                 MessageBox.Show(e.Message+"\n\nPlease, fix this error before continuing.", "Error taglib", MessageBoxButton.OK);
             }
+        }
+
+        public void ApplySearch(String search)
+        {
+            Items = Items.Where(item => item.Filename.Contains(search)).ToList();
         }
     }
 }

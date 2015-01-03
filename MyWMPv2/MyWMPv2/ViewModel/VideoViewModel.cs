@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MyWMPv2.Model;
 using MyWMPv2.Utilities;
+using MyWMPv2.View;
 using ListView = System.Windows.Controls.ListView;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 
@@ -60,6 +61,11 @@ namespace MyWMPv2.ViewModel
             if (fbd.ShowDialog() != DialogResult.OK) return;
             _library.Directory = fbd.SelectedPath;
             _library.Refresh(fgList);
+        }
+        public void Video_Search(String fgList)
+        {
+            String search = MyDialog.Prompt("Custom search", "Enter the string to search", MyDialog.Size.Big);
+            _library.ApplySearch(search);
         }
         public void ListVideo_Click(object sender, RoutedEventArgs e, List<ThemeElem> theme)
         {

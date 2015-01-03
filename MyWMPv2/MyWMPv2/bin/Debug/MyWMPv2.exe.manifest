@@ -78,14 +78,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyWMPv2.exe" size="719872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyWMPv2.exe" size="723456">
       <assemblyIdentity name="MyWMPv2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QUeze3aMNkdatWQw0qIYXb8+YPx+A5twxnledPdEPoQ=</dsig:DigestValue>
+        <dsig:DigestValue>7l2ZlY6CaVfUiPCOPMB3PGsL8YheW1lP6AKSop5cuEo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

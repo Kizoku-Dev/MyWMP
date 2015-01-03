@@ -103,6 +103,10 @@ namespace MyWMPv2.View
         {
             _applicationViewModel.HomeViewModel.MusicViewModel.Music_Directory(sender, e, ListMusic, _applicationViewModel.TE.FgList);
         }
+        private void Music_Search(object sender, RoutedEventArgs e)
+        {
+            _applicationViewModel.HomeViewModel.MusicViewModel.Music_Search(_applicationViewModel.TE.FgList);
+        }
         private void ListMusic_Click(object sender, RoutedEventArgs e)
         {
             _applicationViewModel.HomeViewModel.MusicViewModel.ListMusic_Click(sender, e, _applicationViewModel.TE.CurrentTheme);
@@ -123,6 +127,10 @@ namespace MyWMPv2.View
         {
             _applicationViewModel.HomeViewModel.VideoViewModel.Video_Directory(sender, e, ListVideo, _applicationViewModel.TE.FgList);
         }
+        private void Video_Search(object sender, RoutedEventArgs e)
+        {
+            _applicationViewModel.HomeViewModel.VideoViewModel.Video_Search(_applicationViewModel.TE.FgList);
+        }
         private void ListVideo_Click(object sender, RoutedEventArgs e)
         {
             _applicationViewModel.HomeViewModel.VideoViewModel.ListVideo_Click(sender, e, _applicationViewModel.TE.CurrentTheme);
@@ -142,6 +150,10 @@ namespace MyWMPv2.View
         private void Image_Directory(object sender, RoutedEventArgs e)
         {
             _applicationViewModel.HomeViewModel.ImageViewModel.Image_Directory(sender, e, ListImage, _applicationViewModel.TE.FgList);
+        }
+        private void Image_Search(object sender, RoutedEventArgs e)
+        {
+            _applicationViewModel.HomeViewModel.ImageViewModel.Image_Search(_applicationViewModel.TE.FgList);
         }
         private void ListImage_Click(object sender, RoutedEventArgs e)
         {

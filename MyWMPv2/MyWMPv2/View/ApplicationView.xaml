@@ -150,6 +150,11 @@
                                     <Image Source="Resources/Images/reload-black.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem Header="Do a custom search" Click="Music_Search">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/search-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -164,6 +169,11 @@
                                     <Image Source="Resources/Images/reload-black.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem Header="Do a custom search" Click="Video_Search">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/search-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -176,6 +186,11 @@
                             <MenuItem Header="Select the directory" Click="Image_Directory">
                                 <MenuItem.Icon>
                                     <Image Source="Resources/Images/reload-black.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Do a custom search" Click="Image_Search">
+                                <MenuItem.Icon>
+                                    <Image Source="Resources/Images/search-black.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>

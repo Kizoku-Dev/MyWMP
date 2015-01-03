@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Media;
 using MyWMPv2.Utilities;
 
 namespace MyWMPv2.Model
@@ -45,6 +44,11 @@ namespace MyWMPv2.Model
                          Filename = Path.GetFileNameWithoutExtension(file),
                          FgList = Converter.StringToColor(fgList)
                      }).ToList();
+        }
+
+        public void ApplySearch(String search)
+        {
+            Items = Items.Where(item => item.Filename.Contains(search)).ToList();
         }
     }
 }
