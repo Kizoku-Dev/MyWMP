@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="MyWMPv2.exe" version="1.0.0.0" publicKeyToken="8d26f0a8545becfb" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="MyWMPv2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="MyWMPv2.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- Options du manifeste de contrôle de compte d'utilisateur
+             Si vous souhaitez modifier le niveau du contrôle de compte d'utilisateur Windows, remplacez le nœud 
+             requestedExecutionLevel par l'une des propositions suivantes.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            La spécification du nœud requestedExecutionLevel désactivera la virtualisation de fichiers et du Registre.
+            Si vous souhaitez utiliser la virtualisation de fichiers et du Registre pour la compatibilité 
+            descendante, supprimez le noeud requestedExecutionLevel.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Antlr4.StringTemplate.dll" size="296448">
+      <assemblyIdentity name="Antlr4.StringTemplate" version="4.0.6.9004" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>VEEf7A+7/mqm+FBCRthSAyelWZKHEq0NGwMmZo5RBTY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hardcodet.Wpf.TaskbarNotification.dll" size="44032">
+      <assemblyIdentity name="Hardcodet.Wpf.TaskbarNotification" version="1.0.5.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>iCbrmJ9V8Nj1RdS0IZMfpKkjqxkMBcp2aDkWvO5jxqs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyToolkit.dll" size="182272">
+      <assemblyIdentity name="MyToolkit" version="2.3.22.0" publicKeyToken="3E349A1360994D26" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>nwQp0EQ4YPwNNB5Zx07DINivGCeSKgUOIotg4vQrE6o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyToolkit.Extended.dll" size="75776">
+      <assemblyIdentity name="MyToolkit.Extended" version="2.3.22.0" publicKeyToken="3E349A1360994D26" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>hoviMCKdQbcmsWLBDFOYPfhDiL/ZROMkHWRw+wPx5u4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyWMPv2.exe" size="852992">
+      <assemblyIdentity name="MyWMPv2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>7Ysl1jXvEAqEFRO+aAA60w6YwzfVkDkljJ/5Bg1TBPE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="policy.2.0.taglib-sharp.dll" size="3072">
+      <assemblyIdentity name="policy.2.0.taglib-sharp" version="0.0.0.0" publicKeyToken="DB62EBA44689B5B0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>5NE7a3v2CdQ0sQx6u+RFtq+ua500tujNccDuvhxrr34=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="taglib-sharp.dll" size="443392">
+      <assemblyIdentity name="taglib-sharp" version="2.1.0.0" publicKeyToken="DB62EBA44689B5B0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>iuCVedAthcrHWIW2RUfcEpQOm58u5B0cRh9ZkIRQcYg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="MyWMPv2.exe.config" size="445">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zYnEkXiXNB6FDZkBJg+p79HWLoJLz1xhkx355s4tT4Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Liste de toutes les versions de Windows avec lesquelles cette application peut fonctionner. 
+      Windows sélectionnera automatiquement l'environnement le plus compatible.-->
+      <!-- Si votre application est conçue pour fonctionner avec Windows Vista, supprimez les commentaires du nœud supportedOS suivant-->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"></supportedOS>-->
+      <!-- Si votre application est conçue pour fonctionner avec Windows 7, supprimez les commentaires du nœud supportedOS suivant-->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>-->
+      <!-- Si votre application est conçue pour fonctionner avec Windows 8, supprimez les commentaires du nœud supportedOS suivant-->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"></supportedOS>-->
+      <!-- Si votre application est conçue pour fonctionner avec Windows 8.1, supprimez les commentaires du nœud supportedOS suivant-->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=PC-DOVAN_N\noeld_000" issuerKeyHash="f93a50cb448ef594c670c6368a9c8ecde39ae1b9" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>SbkUvetseYbiffdBjwFruAbxw1W/Sywzgw0aOE7XnhE=</DigestValue></Reference></SignedInfo><SignatureValue>NHs9G2nPGa6/WjT5m5x6zjbU5cf6TOwr/xuR/Y/pRqxZlkel3fCsPo4xliaT+jqu2NkEbHqyFVrLU0kB0Vd6zsONb11rnGp6U6se5o2ybNg3EoZRAfj5+Tn3kdU+a6BfwQroyVbORiAdSpOsOC9pDBhxFADk2pQB7BLA1WwlGIY=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>ueDlF5wKV2d4HTgFg9GNShiB9qRce13x2TMYAPRRk4izjzv19oAtMuWcz9JoJIuk7wk02ZR1d/NWXDTFxQUTE2T8yXkYok4GdJXTblFS3ObQ/rEi/1wccmg909RShoakxzqgMLzeqir8Ttnk2gFdHX8PUeqgxCOtOmcKJsQiNCM=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="119ed74e381a0d83332c4bbf55c3f106b86b018f41f77de286796cebbd14b949" Description="" Url=""><as:assemblyIdentity name="MyWMPv2.exe" version="1.0.0.0" publicKeyToken="8d26f0a8545becfb" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=PC-DOVAN_N\noeld_000</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>7TcPXdqYHBWjYqGBYVzTlHa37CvqKTu1cu8Iz2DWDN8=</DigestValue></Reference></SignedInfo><SignatureValue>ocJJ6pfC7hAQa88GloovsLPeBrALUZzVeLVABYxbq5ynFlRtt1pqYk+TfeCZDFYHlOtwmFZRBTX1mg4er2c7GfcN9r/BR/WUX1BrY6jL5xbcxvQZ5XX4tUbJSdMtyuLBvYf+B6faX/c+N58iZmiDN2fnhko7HvKIiGdahLyIL3o=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>ueDlF5wKV2d4HTgFg9GNShiB9qRce13x2TMYAPRRk4izjzv19oAtMuWcz9JoJIuk7wk02ZR1d/NWXDTFxQUTE2T8yXkYok4GdJXTblFS3ObQ/rEi/1wccmg909RShoakxzqgMLzeqir8Ttnk2gFdHX8PUeqgxCOtOmcKJsQiNCM=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB6TCCAVKgAwIBAgIQSFBNo9ASAaZGpWBUFq5nMjANBgkqhkiG9w0BAQsFADAzMTEwLwYDVQQDHigAUABDAC0ARABPAFYAQQBOAF8ATgBcAG4AbwBlAGwAZABfADAAMAAwMB4XDTE0MTIyODE4NDUzNFoXDTE1MTIyOTAwNDUzNFowMzExMC8GA1UEAx4oAFAAQwAtAEQATwBWAEEATgBfAE4AXABuAG8AZQBsAGQAXwAwADAAMDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAueDlF5wKV2d4HTgFg9GNShiB9qRce13x2TMYAPRRk4izjzv19oAtMuWcz9JoJIuk7wk02ZR1d/NWXDTFxQUTE2T8yXkYok4GdJXTblFS3ObQ/rEi/1wccmg909RShoakxzqgMLzeqir8Ttnk2gFdHX8PUeqgxCOtOmcKJsQiNCMCAwEAATANBgkqhkiG9w0BAQsFAAOBgQAfgVbu+hOsSqF2MLFtHDd5+HLcO8grsk39SfeSzhYZy1Exetzl8wwfGo5QjaYZgW+FEcWUXeeg0kw/HzTw3Z2Z43JQ/MeDq2/c6SAgcF4YcebuJ7Nydl1x5yRHdL2rR6jcQIM+XzEJLsH7XdMdynk5100Jko5rwaM83Dbiak7LcA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
