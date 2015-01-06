@@ -15,6 +15,7 @@ C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\bin\Rel
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\bin\Release\MyToolkit.xml
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\bin\Release\MyToolkit.Extended.xml
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\bin\Release\policy.2.0.taglib-sharp.config
+C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\MyWMPv2.csprojResolveAssemblyReference.cache
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\View\ApplicationView.g.cs
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\App.g.cs
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\GeneratedInternalTypeHelper.g.cs
@@ -29,4 +30,3 @@ C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Rel
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\MyWMPv2.application
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\MyWMPv2.exe
 C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\MyWMPv2.pdb
-C:\Users\noeld_000\documents\visual studio 2013\Projects\MyWMPv2\MyWMPv2\obj\Release\MyWMPv2.csprojResolveAssemblyReference.cache

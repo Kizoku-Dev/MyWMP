@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\noeld_000\Documents\Visual Studio 2013\Projects\MyWMPv2\Publier\</PublishUrl>
+    <PublishUrl>C:\Users\noeld_000\Documents\Visual Studio 2013\Projects\MyWMPv2\PublierNoSign\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -54,7 +54,8 @@
     <ManifestCertificateThumbprint>80755830B2FD1FC4DB852370C4C64A53321567F4</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MyWMPv2_CléTemporaire.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -66,7 +67,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>View\Resources\Images\wmpicon.ico</ApplicationIcon>
